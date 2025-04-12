@@ -1,0 +1,13 @@
+server:
+  port: 8001
+
+logging:
+  level:
+    org:
+      keycloak: debug
+      springframework: info
+
+keycloak:
+  realm: ck-localhost
+  resource: spring-project-client-id
+  auth-server-url: http://localhost:8080/realms/ck-localhost
