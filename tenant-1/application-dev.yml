@@ -5,7 +5,7 @@ logging:
   level:
     org:
       #keycloak: debug
-      springframework: trace
+      springframework: info
 
 keycloak:
   realm: ck-localhost
