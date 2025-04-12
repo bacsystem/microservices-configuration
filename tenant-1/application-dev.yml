@@ -4,8 +4,8 @@ server:
 logging:
   level:
     org:
-      keycloak: debug
-      springframework: info
+      #keycloak: debug
+      springframework: trace
 
 keycloak:
   realm: ck-localhost
@@ -16,3 +16,29 @@ spring:
   application:
     name: api-keycloak-spring
     version: 'v1.0.0'
+  banner:
+    location: classpath:banner.txt
+      #security:
+
+      #oauth2:
+      #client:
+      #  registration:
+      #    keycloak:
+      #      client-id: spring-project-client-id
+      #      client-secret: HRhdGZAEtSvLUz6fCTxtEv5WwrzUHeSY
+      #      scope: openid
+      #      authorization-grant-type: authorization_code
+      #  provider:
+      #    keycloak:
+      #      issuer-uri: http://localhost:8080/realms/ck-localhost
+      #      user-name-attribute: preferred_username
+      # resourceserver:
+    # jwt:
+    # issuer-uri: http://localhost:8080/realms/ck-localhost
+    #  jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+    #http://localhost:8080/realms/ck-localhost/protocol/openid-connect/certs
+
+  #keycloak:
+  #  realm: ck-localhost
+  #  resource: spring-project-client-id
+  #  auth-server-url: http://localhost:8080/realms/ck-localhost
