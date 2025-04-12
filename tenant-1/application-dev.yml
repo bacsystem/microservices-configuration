@@ -11,3 +11,8 @@ keycloak:
   realm: ck-localhost
   resource: spring-project-client-id
   auth-server-url: http://localhost:8080/realms/ck-localhost
+
+spring:
+  application:
+    name: api-keycloak-spring
+    version: 'v1.0.0'
