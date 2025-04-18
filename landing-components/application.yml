@@ -1,11 +1,53 @@
 server:
-  port: 8004
-
+  netty:
+    connection-timeout: 5000
+    idle-timeout: 6000
+  compression:
+    enabled: true
+  tomcat:
+    uri-encoding: utf-8
+  error:
+    include-stacktrace: always
 spring:
-  data:
-    mongodb:
-      host: 192.168.18.13
-      database: test
-      password: ''
-      username: admin
-      port: 27017
+  application:
+    name: api-bs-landing-components-microservice
+  webflux:
+    base-path: /api-bs-landing-components-microservice/v1
+  main:
+    banner-mode: log
+    lazy-initialization: false
+    allow-circular-references: false
+  mvc:
+    converters:
+      preferred-json-mapper: jsonb
+  devtools:
+    restart:
+      enabled: true
+    add-properties: false
+  banner:
+    location: classpath:banner.txt
+
+logging:
+  level:
+    com.bacsystem: info
+    web: info
+    sql: trace
+    org.springframework.data.mongodb: debug
+
+
+management:
+  info:
+    git:
+      enabled: true
+      mode: full
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    db:
+      enabled: true
+    liveness-state:
+      enabled: true
+    readiness-state:
+      enabled: true
