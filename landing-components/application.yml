@@ -1,0 +1,11 @@
+server:
+  port: 8003
+
+spring:
+  data:
+    mongodb:
+      host: 192.168.18.13
+      database: test
+      password: ''
+      username: admin
+      port: 27017
