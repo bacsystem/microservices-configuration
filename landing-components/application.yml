@@ -27,6 +27,13 @@ spring:
     add-properties: false
   banner:
     location: classpath:banner.txt
+  data:
+    mongodb:
+      port: 27017
+      username: admin
+      password: admin123
+      database: admin
+      host: localhost
 
 logging:
   level:
