@@ -43,7 +43,6 @@ logging:
     sql: trace
     org.springframework.data.mongodb: debug
 
-
 management:
   server:
     port: ${METRIC_SERVER_PORT:8082}
