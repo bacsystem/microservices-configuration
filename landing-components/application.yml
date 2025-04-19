@@ -44,6 +44,8 @@ logging:
 
 
 management:
+  server:
+    port: ${METRIC_SERVER_PORT:8082}
   info:
     git:
       enabled: true
