@@ -12,6 +12,7 @@ server:
 spring:
   application:
     name: api-bs-landing-components-microservice
+    version: v1
   webflux:
     base-path: /api-bs-landing-components-microservice/v1
   main:
