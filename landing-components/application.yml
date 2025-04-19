@@ -33,7 +33,7 @@ spring:
       port: 27017
       username: admin
       password: admin123
-      database: landing-components
+      database: admin
       host: localhost
 
 logging:
