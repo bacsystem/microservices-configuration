@@ -6,6 +6,15 @@ def call() {
             stage('Clonar Repositorio') {
                 steps {
                     echo 'Clonando el repositorio...'
+                    sh "ls -la"
+                    script{
+                        (agentLabel, solutionProject) = utils.prepareDeploy()
+                        if (agentLabel == null) {
+                            agentLabel = "principal"
+                        }
+                        sh "ls -la"
+                    }
+
                 }
             }
 
