@@ -16,6 +16,9 @@ def call(String version, scriptInstance) {
         environment {
             DEPLOYMENT_VERSION = "v1"
         }
+        options{
+            disableConcurrentBuilds()
+        }
 
         stages {
             stage('Setting Up & Initialising Env') {
