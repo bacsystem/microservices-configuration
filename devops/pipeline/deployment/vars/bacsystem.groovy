@@ -1,7 +1,11 @@
+import main.flow.builder.Builder
+
 //def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
 def call(Map params = [:]) {
     echo "process ${params}"
     echo "process ${params.value}"
+
+    def builder = new Builder(params.instance)
 
     //def agentLabel = "principal"
     // def solutionProject = ""
