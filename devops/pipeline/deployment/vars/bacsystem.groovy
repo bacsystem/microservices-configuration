@@ -33,8 +33,14 @@ def call(String version, scriptInstance) {
                         }
                         echo "[INFO] Using agent: ${agentLabel} and solution project: ${solutionProject}"
 
+
                         // Directory listing (for debugging)
                         sh "ls -la"
+
+                        def buildTool = getBuildToolFromRepo()
+                        echo "[INFO] Detected build tool: ${buildTool}"
+
+                        executeBuildTool(buildTool)
                     }
 
                 }
