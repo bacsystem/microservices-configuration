@@ -25,6 +25,6 @@ class Builder extends PipelineBase {
 
     Builder(def scriptInstance) {
         super(scriptInstance)
-        echo "[INFO] load builder process"
+        scriptInstance.echo "[INFO] load builder process"
     }
 }
