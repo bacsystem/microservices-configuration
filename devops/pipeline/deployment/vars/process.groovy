@@ -1,7 +1,7 @@
 import main.flow.constants.IConstants
 
 def call(Map params = [:]) {
-    sh "echo process ${params.process}."
+    sh "echo value ${params.value}."
     sh "echo instance ${params.instance}."
     sh "echo wout ${params.wout}."
     sh "echo smc ${params.smc}."
