@@ -2,11 +2,11 @@ import main.flow.builder.Builder
 import main.flow.constants.IConstants
 
 def call(Map params = [:]) {
-    sh "echo value ${params.value}."
-    sh "echo instance ${params.instance}."
-    sh "echo wout ${params.wout}."
-    sh "echo smc ${params.smc}."
-    sh "echo opt ${params.opt}."
+    echo "echo value ${params.value}."
+    echo "echo instance ${params.instance}."
+    echo "echo wout ${params.wout}."
+    echo "echo smc ${params.smc}."
+    echo "echo opt ${params.opt}."
 
     def builder = new Builder(params.instance)
     params.builder = builder
