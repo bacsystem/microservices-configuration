@@ -8,9 +8,10 @@ def call(Map params = [:]) {
     echo "echo opt ${params.opt}."
 
     if (IConstants.PipelineProcess.PROCESS.value() == params.value) {
+        echo "[INFO] Init process pipeline jenkins."
         bacsystem(params)
     } else {
-        echo "No recognized build tool found. Skipping build process."
+        echo "[WARN] No recognized build tool found. Skipping build process."
     }
 
 }
