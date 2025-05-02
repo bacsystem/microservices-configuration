@@ -7,38 +7,69 @@
  */
 
 def repositoryName(Object scm) {
-    echo "scm ${scm}"
-    def name = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
-    echo "name repository ${name}"
-    return name
+    echo "[INFO] SCM object: ${scm}"
+    // Ensure the SCM object is not null and has the expected structure
+    if (scm == null || !scm.getUserRemoteConfigs()) {
+        error "[ERROR] SCM object is invalid or missing userRemoteConfigs"
+    }
+    // Extract the URL from the first remote config
+    def repoUrl = scm.getUserRemoteConfigs()[0]?.getUrl()
+
+    if (!repoUrl) {
+        error "[ERROR] Repository URL not found in SCM configuration"
+    }
+
+    // Tokenize and extract repository name
+    def repoName = repoUrl.tokenize('/').last().split("\\.")[0]
+
+    echo "[INFO] Extracted repository name: ${repoName}"
+
+    return repoName
 }
 
 def deployParams() {
-    dir('deploy-config') {
+    def deployDir = 'deploy-config'
+    def configRepo = 'https://github.com/dbacilio88/microservices-configuration.git'
+    def credentialsId = 'github-jenkins-ssh'
+    def configFilePath = "${deployDir}/deploy/helm/environment/config/deploy-config.yml"
+
+    // Checkout the configuration repository
+    dir(deployDir) {
         checkout([
                 $class           : 'GitSCM',
                 branches         : [[name: 'master']],
                 userRemoteConfigs: [[
-                                            url          : 'https://github.com/dbacilio88/microservices-configuration.git',
-                                            credentialsId: 'github-jenkins-ssh'
+                                            url          : configRepo,
+                                            credentialsId: credentialsId
                                     ]]
         ])
     }
-    def REPO_NAME = repositoryName(scm)
-    echo "REPO_NAME ${REPO_NAME}"
-    def content = readYaml(file: "${WORKSPACE}/deploy-config/deploy/helm/environment/config/deploy-config.yml")
-    echo "content ${content}"
-    def appData = content['applications'][REPO_NAME]
-    echo "appData ${appData}"
+    // Extract the current repository name
+    String repoName = repositoryName(scm)
+    echo "[INFO] Detected repository name: ${repoName}"
 
-    def agentLabel = null
-    def solutionProject = null
-    if (appData != null) {
-        agentLabel = appData['agent']
-        solutionProject = appData['group']
+    // Read the YAML file
+    if (!fileExists(configFilePath)) {
+        error "[ERROR] Configuration file not found: ${configFilePath}"
     }
 
-    echo "agent: ${agentLabel}, group ${solutionProject}"
+    def content = readYaml(file: configFilePath)
+
+    if (content == null || !content.containsKey('applications')) {
+        error "[ERROR] Invalid YAML structure or 'applications' key not found"
+    }
+
+    def appData = content.applications[repoName]
+
+    if (appData == null) {
+        error "[ERROR] No configuration found for application '${repoName}' in the YAML"
+    }
+
+    def agentLabel = appData.agent ?: 'default-agent'
+
+    def solutionProject = appData.group ?: 'default-group'
+
+    echo "[INFO] Parameters obtained: agent='${agentLabel}', group='${solutionProject}'"
 
     return [agentLabel, solutionProject]
 }

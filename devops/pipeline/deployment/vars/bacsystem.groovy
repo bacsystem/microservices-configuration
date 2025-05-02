@@ -2,8 +2,8 @@ def call(String version, scriptInstance) {
     echo "version ${version}"
     echo "scriptInstance ${scriptInstance}"
 
-    def agentLabel = "principal"
-    def solutionProject = ""
+    //def agentLabel = "principal"
+    // def solutionProject = ""
 
     pipeline {
         agent none
@@ -20,14 +20,20 @@ def call(String version, scriptInstance) {
         stages {
             stage('Setting Up & Initialising Env') {
                 agent {
-                    label agentLabel
+                    label "principal"
                 }
                 steps {
                     script {
-                        (agentLabel, solutionProject) = utils.deployParams()
+                        // Call deployParams to get agent and solution project
+                        def (agentLabel, solutionProject) = utils.deployParams()
+
+                        // Set fallback values if null
                         if (agentLabel == null) {
                             agentLabel = "principal"
                         }
+                        echo "[INFO] Using agent: ${agentLabel} and solution project: ${solutionProject}"
+
+                        // Directory listing (for debugging)
                         sh "ls -la"
                     }
 
@@ -94,12 +100,12 @@ def call(String version, scriptInstance) {
         post {
             always {
                 script {
-                    echo "always Build jenkins"
+                    echo "[INFO] Always executed: Build Jenkins"
                 }
             }
             failure {
                 script {
-                    echo "failure Build jenkins"
+                    echo "[ERROR] Build failed: Jenkins"
                 }
             }
         }
