@@ -37,10 +37,10 @@ def call(String version, scriptInstance) {
                         // Directory listing (for debugging)
                         sh "ls -la"
 
-                        def buildTool = getBuildToolFromRepo()
+                        def buildTool = utils.getBuildToolFromRepo()
                         echo "[INFO] Detected build tool: ${buildTool}"
 
-                        executeBuildTool(buildTool)
+                        utils.executeBuildTool(buildTool)
                     }
 
                 }
