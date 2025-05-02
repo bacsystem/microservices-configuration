@@ -8,5 +8,5 @@ def params = [
                         smc     : true,
                         opt     : false
                     ]
-
+echo "params ${params}"
 process(params)

@@ -9,7 +9,7 @@ def call(Map params = [:]) {
     sh "echo opt ${params.opt}."
 
     def builder = new Builder(params.instance)
-    params.builer = builder
+    params.builder = builder
 
     if (IConstants.PipelineProcess.PROCESS.value() == params.value) {
         bacsystem(params)
