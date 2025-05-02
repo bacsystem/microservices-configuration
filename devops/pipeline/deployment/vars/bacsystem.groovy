@@ -1,12 +1,10 @@
-import main.flow.builder.Builder
-
-def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
-    echo "process ${process}"
-    echo "builder ${builder}"
+//def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
+def call(Map params = [:]) {
+    echo "process ${params}"
+    echo "process ${params.value}"
 
     //def agentLabel = "principal"
     // def solutionProject = ""
-
 
     pipeline {
         agent none
@@ -19,7 +17,7 @@ def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) 
         environment {
             DEPLOYMENT_VERSION = "v1"
         }
-        options{
+        options {
             disableConcurrentBuilds()
         }
 

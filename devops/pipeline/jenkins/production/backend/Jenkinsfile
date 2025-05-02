@@ -1,4 +1,4 @@
 
 @Library('bacsystem-shared-lib') _
 
-process(value:"v1", instance:this, wout:true,smc:false,opt:true)
+process(value:"v1", instance:this)
