@@ -35,8 +35,19 @@ def deployParams() {
     }
     def REPO_NAME = repositoryName(scm)
     echo "REPO_NAME ${REPO_NAME}"
-    def agentLabel = "jenkins"
-    def solutionProject = "jenkins"
-    echo "Agent: ${agentLabel}, group ${solutionProject}"
+    def content = readYaml(file: "${WORKSPACE}/deploy-config/deploy/helm/environment/config/deploy-config.yml")
+    echo "content ${content}"
+    def appData = content['applications'][REPO_NAME]
+    echo "appData ${appData}"
+
+    def agentLabel = null
+    def solutionProject = null
+    if (appData != null) {
+        agentLabel = appData['agent']
+        solutionProject = appData['group']
+    }
+
+    echo "agent: ${agentLabel}, group ${solutionProject}"
+
     return [agentLabel, solutionProject]
 }

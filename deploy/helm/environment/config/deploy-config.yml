@@ -1,0 +1,4 @@
+applications:
+  microservices-configuration:
+    agent: principal
+    group: configuration
