@@ -1,4 +1,6 @@
-def call() {
+def call(String version, scriptInstance) {
+    echo "version ${version}"
+    echo "scriptInstance ${scriptInstance}"
     pipeline {
         agent any
 
@@ -7,7 +9,7 @@ def call() {
                 steps {
                     echo 'Clonando el repositorio...'
                     sh "ls -la"
-                    script{
+                    script {
                         (agentLabel, solutionProject) = utils.prepareDeploy()
                         if (agentLabel == null) {
                             agentLabel = "principal"
