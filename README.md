@@ -1,2 +1,2 @@
-# micoservices-configuration
-micoservices-configuration
+# microservices-configuration
+microservices-configuration
