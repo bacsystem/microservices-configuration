@@ -5,6 +5,7 @@ def call(String version, scriptInstance) {
     //def agentLabel = "principal"
     // def solutionProject = ""
 
+
     pipeline {
         agent none
 

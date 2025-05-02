@@ -13,21 +13,21 @@ interface IConstants extends Serializable {
             this.version = version
         }
 
-        String Version() {
+        String value() {
             return this.version
         }
     }
 
-    enum PipelineVersion {
-        Version("GitFlowBase")
-        private String version
+    enum PipelineProcess {
+        PROCESS("GitFlowBase")
+        private String value
 
-        PipelineVersion(String version) {
-            this.version = version
+        PipelineProcess(String value) {
+            this.value = value
         }
 
-        String Version() {
-            return this.version
+        String value() {
+            return this.value
         }
     }
 }
