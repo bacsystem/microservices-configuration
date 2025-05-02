@@ -1,3 +1,4 @@
+import main.flow.builder.Builder
 import main.flow.constants.IConstants
 
 def call(Map params = [:]) {
@@ -6,17 +7,11 @@ def call(Map params = [:]) {
     sh "echo wout ${params.wout}."
     sh "echo smc ${params.smc}."
     sh "echo opt ${params.opt}."
-//String process = IConstants.PipelineProcess.PROCESS.value(), scriptInstance, boolean wout = false, boolean smc = false, boolean opt = false
-    pipeline {
-        agent any
 
-        stages {
-            stage('Build') {
-                steps {
-                    echo "Estoy dentro de un nodo"
-                    sh 'echo hello world'
-                }
-            }
-        }
+    def builder = new Builder(params.instance)
+
+    if (IConstants.PipelineProcess.PROCESS.value() == params.value) {
+        bacsystem(builder, params.wout, params.smc, params.value, params.opt)
     }
+
 }

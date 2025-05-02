@@ -1,6 +1,8 @@
-def call(String version, scriptInstance) {
-    echo "version ${version}"
-    echo "scriptInstance ${scriptInstance}"
+import main.flow.builder.Builder
+
+def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
+    echo "process ${process}"
+    echo "builder ${builder}"
 
     //def agentLabel = "principal"
     // def solutionProject = ""
