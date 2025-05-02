@@ -10,7 +10,7 @@ def call(String version, scriptInstance) {
                     echo 'Clonando el repositorio...'
                     sh "ls -la"
                     script {
-                        (agentLabel, solutionProject) = utils.prepareDeploy()
+                        (agentLabel, solutionProject) = utils.deployParams()
                         if (agentLabel == null) {
                             agentLabel = "principal"
                         }
