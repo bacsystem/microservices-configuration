@@ -1,8 +1,12 @@
-package main.flow
+package main.flow.base
 
-class PipelineBase implements Serializable, IConstants {
+import main.flow.constants.IConstants
+
+class PipelineBase implements IConstants {
+
     @Serial
     static final long serialVersionUID = 1
+
     def scriptInstance
 
     PipelineBase(def scriptInstance) {

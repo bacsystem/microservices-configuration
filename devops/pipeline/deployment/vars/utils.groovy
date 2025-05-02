@@ -7,6 +7,7 @@
  */
 
 def repositoryName(Object scm){
+    echo "scm ${scm}"
     def name = scm.getUserRemoteConfigs()[0].getUrl().tokenize('/').last().split("\\.")[0]
     echo "name repository ${name}"
     return name

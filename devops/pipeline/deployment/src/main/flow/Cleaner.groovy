@@ -2,10 +2,11 @@ package main.flow
 
 import main.flow.base.PipelineBase
 
+
 /**
- * <b>Artifact</b>
+ * <b>Cleaner</b>
  * <p>
- * This class specifies the requirements for the {@link Artifact} component,
+ * This class specifies the requirements for the {@link Cleaner} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -18,16 +19,13 @@ import main.flow.base.PipelineBase
  * @since 1/05/2025
  */
 
+class Cleaner extends PipelineBase {
 
-class Artifact extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
 
-    Artifact(Object scriptInstance) {
+
+    Cleaner(def scriptInstance) {
         super(scriptInstance)
-    }
-
-    def archive(String path, boolean isEmpty= false){
-
     }
 }
