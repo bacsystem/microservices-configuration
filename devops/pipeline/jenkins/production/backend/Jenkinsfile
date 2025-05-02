@@ -1,4 +1,12 @@
 
 @Library('bacsystem-shared-lib') _
 
-process(value:"v1", instance:this)
+def params = [
+                        value   : "v1",
+                        instance: this,
+                        wout    : true,
+                        smc     : true,
+                        opt     : false
+                    ]
+
+process(params)
