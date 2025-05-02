@@ -38,11 +38,13 @@ def call(String version, scriptInstance) {
                         sh "ls -la"
 
                         def buildTool = utils.getBuildToolFromRepo()
-                        echo "[INFO] Detected build tool: ${buildTool}"
-
-                        utils.executeBuildTool(buildTool)
+                        if (buildTool != null) {
+                            echo "[INFO] Detected build tool: ${buildTool}"
+                            utils.executeBuildTool(buildTool)
+                        } else {
+                            echo "No recognized build tool found. Skipping build process."
+                        }
                     }
-
                 }
             }
 
