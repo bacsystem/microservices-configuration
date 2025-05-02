@@ -13,15 +13,6 @@ def repositoryName(Object scm) {
     return name
 }
 
-def prepareDeploy() {
-    def REPO_NAME = repositoryName(scm)
-    echo "REPO_NAME ${REPO_NAME}"
-    def agentLabel1 = "principal"
-    def solutionProject = "ejercito-solution"
-    echo "Agent: ${agentLabel1}, Group: ${solutionProject}"
-    return [agentLabel1, solutionProject]
-}
-
 def deployParams() {
     dir('deploy-config') {
         checkout([

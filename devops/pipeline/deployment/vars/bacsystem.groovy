@@ -1,14 +1,28 @@
 def call(String version, scriptInstance) {
     echo "version ${version}"
     echo "scriptInstance ${scriptInstance}"
+
+    def agentLabel = "principal"
+    def solutionProject = ""
+
     pipeline {
-        agent any
+        agent none
+
+        tools {
+            maven 'maven'
+            gradle 'gradle'
+        }
+
+        environment {
+            DEPLOYMENT_VERSION = "v1"
+        }
 
         stages {
-            stage('Clonar Repositorio') {
+            stage('Setting Up & Initialising Env') {
+                agent {
+                    label agentLabel
+                }
                 steps {
-                    echo 'Clonando el repositorio...'
-                    sh "ls -la"
                     script {
                         (agentLabel, solutionProject) = utils.deployParams()
                         if (agentLabel == null) {
@@ -20,37 +34,73 @@ def call(String version, scriptInstance) {
                 }
             }
 
-            stage('Construir Proyecto') {
+            stage('Unit Test') {
                 steps {
-                    echo 'Construyendo el proyecto...'
+                    echo 'Unit Test...'
                 }
             }
 
-            stage('Pruebas Unitarias') {
+            stage('Dependencies, Code Scan & Bugs') {
                 steps {
-                    echo 'Ejecutando pruebas unitarias...'
+                    echo 'Dependencies, Code Scan & Bugs...'
                 }
             }
 
-            stage('Empaquetar Artefacto') {
+            stage('SonarQube Quality Gate') {
                 steps {
-                    echo 'Empaquetando el artefacto...'
+                    echo 'SonarQube Quality Gate...'
                 }
             }
 
-            stage('Despliegue') {
+            stage('Build Image') {
                 steps {
-                    echo 'Desplegando el artefacto...'
+                    echo 'Build Image...'
+                }
+            }
+
+            stage('deploy to Dev') {
+                steps {
+                    echo 'deploy to Dev...'
+                }
+            }
+
+            stage('deploy to Test') {
+                steps {
+                    echo 'deploy to Test...'
+                }
+            }
+            stage('deploy to UAT') {
+                steps {
+                    echo 'deploy to UAT...'
+                }
+            }
+            stage('deploy to Prod') {
+                steps {
+                    echo 'deploy to Prod...'
+                }
+            }
+            stage('Release') {
+                steps {
+                    echo 'Release...'
+                }
+            }
+            stage('Archive Build') {
+                steps {
+                    echo 'Archive Build...'
                 }
             }
         }
 
         post {
-            success {
-                echo 'Pipeline completado exitosamente'
+            always {
+                script {
+                    echo "always Build jenkins"
+                }
             }
             failure {
-                echo 'Hubo un error en el pipeline'
+                script {
+                    echo "failure Build jenkins"
+                }
             }
         }
     }
