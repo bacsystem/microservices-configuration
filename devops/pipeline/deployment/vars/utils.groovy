@@ -34,6 +34,7 @@ def deployParams() {
         ])
     }
     def REPO_NAME = repositoryName(scm)
+    echo "REPO_NAME ${REPO_NAME}"
     def agentLabel = "jenkins"
     def solutionProject = "jenkins"
     echo "Agent: ${agentLabel}, group ${solutionProject}"
