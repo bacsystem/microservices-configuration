@@ -44,12 +44,12 @@ def call(Map params = [:]) {
                         // Directory listing (for debugging)
                         sh "ls -la"
 
-                        def compiler = staging.getCompiler()
+                        String compiler = staging.getCompiler()
 
                         if (compiler != null) {
                             echo "[INFO] Detected build tool: ${compiler}"
                             //utils.executeBuildTools(buildTool)
-                            staging.getBuild("${params.value}", solutionProject, "${compiler}")
+                            staging.getBuild("${params.value}", solutionProject, compiler)
                         } else {
                             echo "No recognized build tool found. Skipping build process."
                         }
