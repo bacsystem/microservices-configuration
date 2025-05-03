@@ -1,4 +1,4 @@
-package main.flow.builder
+package main.flow.pipeline
 
 import main.flow.base.PipelineBase
 
@@ -22,9 +22,19 @@ import main.flow.base.PipelineBase
 class Builder extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
+    private boolean isPrepare=false
+    private boolean isCustom=false
 
     Builder(def scriptInstance) {
         super(scriptInstance)
         scriptInstance.echo "[INFO] load builder process"
     }
+
+    def prepare(String process, String solution){
+        if (!isPrepare && !isCustom){
+
+        }
+    }
+
+
 }

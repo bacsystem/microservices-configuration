@@ -1,4 +1,4 @@
-import main.flow.builder.Builder
+import main.flow.pipeline.Builder
 
 //def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
 def call(Map params = [:]) {
