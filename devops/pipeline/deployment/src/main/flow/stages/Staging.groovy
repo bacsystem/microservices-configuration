@@ -56,7 +56,7 @@ class Staging extends PipelineBase {
             error "[ERROR] Configuration file not found: ${configFilePath}"
         }
 
-        def content = Utility.readYaml(configFilePath, this._dsl)
+        def content = this._dsl.readYaml(file: configFilePath)
 
         if (content == null || !content.containsKey('applications')) {
             error "[ERROR] Invalid YAML structure or 'applications' key not found"
