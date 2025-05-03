@@ -3,7 +3,7 @@
 
 def params = [
                         value   : "v1",
-                        instance: this,
+                        dsl     : this,
                         wout    : true,
                         smc     : true,
                         opt     : false

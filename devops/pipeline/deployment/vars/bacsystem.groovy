@@ -4,7 +4,7 @@ def call(Map params = [:]) {
     echo "process ${params}"
     echo "process ${params.value}"
 
-    def staging = new Staging(params.instance)
+    def staging = new Staging(params.dsl)
 
     //def agentLabel = "principal"
     // def solutionProject = ""
