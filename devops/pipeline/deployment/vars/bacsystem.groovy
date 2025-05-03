@@ -48,7 +48,7 @@ def call(Map params = [:]) {
                         def buildTool = utils.getBuildToolFromRepo()
                         if (buildTool != null) {
                             echo "[INFO] Detected build tool: ${buildTool}"
-                            utils.executeBuildTool(buildTool)
+                            utils.executeBuildTools(buildTool)
                         } else {
                             echo "No recognized build tool found. Skipping build process."
                         }
