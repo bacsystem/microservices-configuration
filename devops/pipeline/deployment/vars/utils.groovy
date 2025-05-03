@@ -103,7 +103,7 @@ def executeBuildTools(String tools) {
             'nodejs': 'npm install && npm run build',
             'python': 'python setup.py install'
     ]
-
+    echo "[INFO] Build constains key tool: ${buildTools.containsKey(tools)}"
     if (buildTools.containsKey(tools)) {
         echo "[INFO] Running ${tools}..."
         sh buildTools[tools]
