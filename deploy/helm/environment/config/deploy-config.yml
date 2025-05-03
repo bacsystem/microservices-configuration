@@ -2,3 +2,6 @@ applications:
   microservices-configuration:
     agent: principal
     group: configuration
+  lib-microservices-configuration:
+    agent: principal
+    group: configuration
