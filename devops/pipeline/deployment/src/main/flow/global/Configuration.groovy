@@ -44,6 +44,16 @@ class Configuration extends PipelineBase {
     }
 
     /**
+     * Loads the configuration content and writes it into a target file.
+     * @param targetFile Target file name in the workspace. If null, uses configName.
+     * @return this
+     */
+    Configuration loadToFile(String target) {
+        def fileName = target ?: configName
+        writeToFile(fileName, getResourceContent())
+        return this
+    }
+    /**
      * Set the configuration file name to be used.
      * @param configName the name of the config file inside /config
      * @return this for method chaining
@@ -54,6 +64,13 @@ class Configuration extends PipelineBase {
         }
         def content = scriptInstance.libraryResource("${CONFIG_BASE_PATH}/${configName}")
         scriptInstance.writeFile(file: target, text: content)
+    }
+    /**
+     * Returns the raw content of the configuration file.
+     * @return String with file content
+     */
+    String getContent() {
+        return getResourceContent()
     }
 
     /**
@@ -72,8 +89,7 @@ class Configuration extends PipelineBase {
      */
     @PackageScope
     def execute() {
-        def content = scriptInstance.libraryResource("${CONFIG_PATH_BASE}/${configName}")
-        scriptInstance.writeFile(file: configName, text: content)
+        writeToFile(configName, getResourceContent())
         scriptInstance.sh "cat ./${configName}"
         scriptInstance.load("./$configName")
         scriptInstance.println("configTest=${scriptInstance.TEST_CONFIG}")
@@ -87,6 +103,6 @@ class Configuration extends PipelineBase {
     }
 
     private void writeToFile(String fileName, String content) {
-        scriptInstance.writeFile file: fileName, text: content
+        scriptInstance.writeFile(file: fileName, text: content)
     }
 }
