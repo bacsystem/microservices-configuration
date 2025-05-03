@@ -6,15 +6,26 @@ interface IConstants extends Serializable {
 
     enum PullRequestStatus {
 
-        PENDING("pending")
-        private String version
+        PENDING("pending"),
+        IN_PROGRESS("in_progress"),
+        SUCCESS("success"),
+        FAILURE("failure"),
+        ERROR("error"),
 
-        PullRequestStatus(String version) {
-            this.version = version
+        private String value
+
+        PullRequestStatus(String value) {
+            this.value = value
         }
 
         String value() {
-            return this.version
+            return this.value
+        }
+
+        static String get(String val) {
+            def v = values()
+                    .find { it.name() == val }
+            return v.value()
         }
     }
 
@@ -28,6 +39,12 @@ interface IConstants extends Serializable {
 
         String value() {
             return this.value
+        }
+
+        static String get(String val) {
+            def v = values()
+                    .find { it.name() == val }
+            return v.value()
         }
     }
 }

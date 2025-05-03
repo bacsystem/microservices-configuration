@@ -1,11 +1,9 @@
-import main.flow.pipeline.Builder
-
 //def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
 def call(Map params = [:]) {
     echo "process ${params}"
     echo "process ${params.value}"
 
-    def builder = new Builder(params.instance)
+    def staging = new Staging(params.instance)
 
     //def agentLabel = "principal"
     // def solutionProject = ""
@@ -45,10 +43,10 @@ def call(Map params = [:]) {
                         // Directory listing (for debugging)
                         sh "ls -la"
 
-                        def buildTool = utils.getBuildToolFromRepo()
+                        def buildTool = staging.getCompiler()
                         if (buildTool != null) {
                             echo "[INFO] Detected build tool: ${buildTool}"
-                            utils.executeBuildTools(buildTool)
+                            //utils.executeBuildTools(buildTool)
                         } else {
                             echo "No recognized build tool found. Skipping build process."
                         }

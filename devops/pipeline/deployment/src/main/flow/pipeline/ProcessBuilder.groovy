@@ -1,11 +1,12 @@
 package main.flow.pipeline
 
 import main.flow.base.PipelineBase
+import main.flow.global.Configuration
 
 /**
  * <b>Builder</b>
  * <p>
- * This class specifies the requirements for the {@link Builder} component,
+ * This class specifies the requirements for the {@link ProcessBuilder} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -19,19 +20,22 @@ import main.flow.base.PipelineBase
  */
 
 
-class Builder extends PipelineBase {
+class ProcessBuilder extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
-    private boolean isPrepare=false
-    private boolean isCustom=false
+    private boolean isPrepare = false
+    private boolean isCustom = false
 
-    Builder(def scriptInstance) {
+    private Configuration configuration
+
+    ProcessBuilder(def scriptInstance) {
         super(scriptInstance)
         scriptInstance.echo "[INFO] load builder process"
+        this.configuration = new Configuration(scriptInstance)
     }
 
-    def prepare(String process, String solution){
-        if (!isPrepare && !isCustom){
+    def prepare(String process, String solution) {
+        if (!isPrepare && !isCustom) {
 
         }
     }

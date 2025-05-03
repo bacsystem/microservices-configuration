@@ -31,6 +31,7 @@ class Configuration extends PipelineBase {
 
     Configuration(def scriptInstance) {
         super(scriptInstance)
+        scriptInstance.echo "[INFO] load configuration process"
     }
 
     /**
@@ -87,11 +88,11 @@ class Configuration extends PipelineBase {
      * @param path logical config path (unused here)
      * @return string content of config file
      */
-    @PackageScope
-    def execute() {
+    // @PackageScope
+    public void execute() {
         writeToFile(configName, getResourceContent())
         scriptInstance.sh "cat ./${configName}"
-        scriptInstance.load("./$configName")
+        scriptInstance.build("./$configName")
         scriptInstance.println("configTest=${scriptInstance.TEST_CONFIG}")
     }
 
