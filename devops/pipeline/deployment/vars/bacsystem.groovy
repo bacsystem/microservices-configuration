@@ -32,7 +32,7 @@ def call(Map params = [:]) {
                 steps {
                     script {
                         // Call deployParams to get agent and solution project
-                        def (agentLabel, solutionProject) = utils.deployParams()
+                        def (agentLabel, solutionProject) = staging.deployParams()
 
                         // Set fallback values if null
                         if (agentLabel == null) {

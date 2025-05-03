@@ -75,25 +75,6 @@ def deployParams() {
 }
 
 
-def getBuildToolFromRepo() {
-    echo "[INFO] Detecting build tool based on repository files..."
-
-    if (fileExists('pom.xml')) {
-        return 'maven'
-    } else if (fileExists('build.gradle')) {
-        return 'gradle'
-    } else if (fileExists('go.mod')) {
-        return 'golang'
-    } else if (fileExists('package.json')) {
-        return 'nodejs'
-    } else if (fileExists('setup.py')) {
-        return 'python'
-    } else {
-        // error "[ERROR] No recognized build tool found in repository."
-        return null
-    }
-}
-
 def executeBuildTools(String tools) {
     echo "[INFO] Selected build tool: ${tools}"
     def buildTools = [

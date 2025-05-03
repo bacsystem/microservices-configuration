@@ -12,7 +12,6 @@ class PipelineBase implements IConstants {
 
     PipelineBase(def dsl) {
         this._dsl = dsl
-
     }
 
     def Console(String msg) {
