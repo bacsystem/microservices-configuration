@@ -48,7 +48,7 @@ class Staging extends PipelineBase {
             ])
         }
 
-        String repoName = Utility.repository(this._dsl) 0
+        String repoName = Utility.repository(this._dsl)
         Console("[INFO] Detected repository name: ${repoName}")
 
         // Read the YAML file
