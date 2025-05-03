@@ -1,7 +1,4 @@
 package main.flow.utils
-
-import main.flow.base.PipelineBase
-
 /**
  * <b>Utility</b>
  * <p>
@@ -18,10 +15,18 @@ import main.flow.base.PipelineBase
  * @since 3/05/2025
  */
 
+/**
+ * method to get repository name
+ * @param repository
+ * @see <a href="https://javadoc.jenkins.io/plugin/git/hudson/plugins/git/GitSCM.html">GitSCM</a>
+ * @see <a href="https://javadoc.jenkins.io/plugin/git/hudson/plugins/git/UserRemoteConfig.html">getUserRemoteConfigs</a>
+ * @see <a href="https://www.jenkins.io/doc/pipeline/steps/workflow-basic-steps/#unstable-set-stage-result-to-unstable">Pipeline: Basic Steps</a>
+ */
+
 
 class Utility {
 
-    static String repository(def dsl){
+    static String repository(def dsl) {
         dsl.echo "[INFO] SCM object: ${dsl.scm}"
         if (dsl.scm == null || !dsl.scm.getUserRemoteConfigs()) {
             error "[ERROR] The object SCM is invalid o is empty 'userRemoteConfigs'"
@@ -36,5 +41,11 @@ class Utility {
         dsl.echo "[INFO] Extracted repository name: ${repoName}"
         return repoName
     }
+
+    static def readYaml(String file, def dsl){
+        return dsl.readYaml(file)
+    }
+
+
 
 }

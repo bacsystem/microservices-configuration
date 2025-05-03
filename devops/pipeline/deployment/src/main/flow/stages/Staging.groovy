@@ -56,7 +56,7 @@ class Staging extends PipelineBase {
             error "[ERROR] Configuration file not found: ${configFilePath}"
         }
 
-        def content = this._dsl.readYaml(file: configFilePath)
+        def content = Utility.readYaml(configFilePath, this._dsl)
 
         if (content == null || !content.containsKey('applications')) {
             error "[ERROR] Invalid YAML structure or 'applications' key not found"
@@ -96,7 +96,10 @@ class Staging extends PipelineBase {
         }
     }
 
-    def build() {}
+    def getBuild(String process = "", String solution = "", String compiler) {
+        Console("[INFO] Iniciando construcción: Proceso: ${process}, Solución: ${solution}, Compilador: ${compiler}")
+        Console("[INFO] Construcción completada para ${solution} utilizando ${compiler}")
+    }
 
     def test() {}
 

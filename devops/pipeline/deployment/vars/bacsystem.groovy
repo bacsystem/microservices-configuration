@@ -6,8 +6,8 @@ def call(Map params = [:]) {
 
     def staging = new Staging(params.dsl)
 
-    //def agentLabel = "principal"
-    // def solutionProject = ""
+    def agentLabel = "principal"
+    def solutionProject = ""
 
     pipeline {
         agent none
@@ -27,12 +27,12 @@ def call(Map params = [:]) {
         stages {
             stage('Setting Up & Initialising Env') {
                 agent {
-                    label "principal"
+                    label agentLabel
                 }
                 steps {
                     script {
                         // Call deployParams to get agent and solution project
-                        def (agentLabel, solutionProject) = staging.deployParams()
+                        (agentLabel, solutionProject) = staging.deployParams()
 
                         // Set fallback values if null
                         if (agentLabel == null) {
@@ -44,10 +44,12 @@ def call(Map params = [:]) {
                         // Directory listing (for debugging)
                         sh "ls -la"
 
-                        def buildTool = staging.getCompiler()
-                        if (buildTool != null) {
-                            echo "[INFO] Detected build tool: ${buildTool}"
+                        def compiler = staging.getCompiler()
+
+                        if (compiler != null) {
+                            echo "[INFO] Detected build tool: ${compiler}"
                             //utils.executeBuildTools(buildTool)
+                            staging.getBuild("${params.value}", solutionProject, "${compiler}")
                         } else {
                             echo "No recognized build tool found. Skipping build process."
                         }
