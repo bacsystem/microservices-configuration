@@ -8,23 +8,19 @@ class PipelineBase implements IConstants {
     @Serial
     static final long serialVersionUID = 1
 
-    def dsl
+    def _dsl
 
     PipelineBase(def dsl) {
-        this.dsl = dsl
+        this._dsl = dsl
 
-    }
-
-    def getDsl() {
-        return this.dsl
     }
 
     def Console(String msg) {
-        this.dsl.echo msg
+        this._dsl.echo msg
     }
 
     boolean ExistFile(String value) {
         if (!value) return false
-        return dsl?.fileExists(value) ?: false
+        return _dsl?.fileExists(value) ?: false
     }
 }
