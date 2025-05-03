@@ -1,7 +1,6 @@
 package main.flow.base
 
 import main.flow.constants.IConstants
-import main.flow.global.Configuration
 
 class PipelineBase implements IConstants {
 
@@ -9,14 +8,14 @@ class PipelineBase implements IConstants {
     @Serial
     static final long serialVersionUID = 1
 
-    def scriptInstance
+    def dsl
 
-    PipelineBase(def scriptInstance) {
-        this.scriptInstance = scriptInstance
+    PipelineBase(def dsl) {
+        this.dsl = dsl
 
     }
 
-    def getInstance() {
-        return this.scriptInstance
+    def getDsl() {
+        return this.dsl
     }
 }

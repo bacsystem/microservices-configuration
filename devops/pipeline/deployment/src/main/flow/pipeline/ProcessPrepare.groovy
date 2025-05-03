@@ -28,14 +28,14 @@ class ProcessPrepare extends PipelineBase {
     private static final String STATIC_CONFIG = "static_environment.env"
     private Configuration configuration
 
-    ProcessPrepare(def scriptInstance, Configuration configuration) {
-        super(scriptInstance)
-        scriptInstance.echo "[INFO] load prepare stage process"
+    ProcessPrepare(def dsl, Configuration configuration) {
+        super(dsl)
+        dsl.echo "[INFO] load prepare stage process"
         this.configuration = configuration
     }
 
     def init(String process, String solution, String compiler) {
         def factory = CompilerFactory.getCompiler(compiler)
-        factory.build(scriptInstance)
+        factory.build(dsl)
     }
 }

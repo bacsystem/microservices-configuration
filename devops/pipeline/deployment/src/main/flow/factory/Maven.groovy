@@ -21,6 +21,6 @@ class Maven extends BuildFactory {
     @Override
     void build(def dsl) {
         def pom = dsl.readMavenPom()
-        dsl.utils
+
     }
 }

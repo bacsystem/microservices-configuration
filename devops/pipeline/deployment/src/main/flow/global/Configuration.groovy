@@ -29,9 +29,9 @@ class Configuration extends PipelineBase {
     // Configuration file name
     private String configName
 
-    Configuration(def scriptInstance) {
-        super(scriptInstance)
-        scriptInstance.echo "[INFO] load configuration process"
+    Configuration(def dsl) {
+        super(dsl)
+        dsl.echo "[INFO] load configuration process"
     }
 
     /**
@@ -63,8 +63,8 @@ class Configuration extends PipelineBase {
         if (!target) {
             target = path
         }
-        def content = scriptInstance.libraryResource("${CONFIG_BASE_PATH}/${configName}")
-        scriptInstance.writeFile(file: target, text: content)
+        def content = dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
+        dsl.writeFile(file: target, text: content)
     }
     /**
      * Returns the raw content of the configuration file.
@@ -80,7 +80,7 @@ class Configuration extends PipelineBase {
      * @return string content of config file
      */
     def getConfiguration(String path) {
-        return scriptInstance.libraryResource("${CONFIG_PATH_BASE}/${configName}")
+        return dsl.libraryResource("${CONFIG_PATH_BASE}/${configName}")
     }
 
     /**
@@ -91,19 +91,19 @@ class Configuration extends PipelineBase {
     // @PackageScope
     public void execute() {
         writeToFile(configName, getResourceContent())
-        scriptInstance.sh "cat ./${configName}"
-        scriptInstance.build("./$configName")
-        scriptInstance.println("configTest=${scriptInstance.TEST_CONFIG}")
+        dsl.sh "cat ./${configName}"
+        dsl.build("./$configName")
+        dsl.println("configTest=${dsl.TEST_CONFIG}")
     }
 
     // ========== Private Methods ==========
 
     private String getResourceContent() {
         assert configName: "configName must be set before accessing content."
-        return scriptInstance.libraryResource("${CONFIG_BASE_PATH}/${configName}")
+        return dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
     }
 
     private void writeToFile(String fileName, String content) {
-        scriptInstance.writeFile(file: fileName, text: content)
+        dsl.writeFile(file: fileName, text: content)
     }
 }

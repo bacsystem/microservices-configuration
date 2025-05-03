@@ -1,8 +1,6 @@
 package main.flow.stages
 
 import main.flow.base.PipelineBase
-import main.flow.global.Configuration
-import main.flow.pipeline.ProcessPrepare
 
 /**
  * <b>Staging</b>
@@ -26,14 +24,11 @@ class Staging extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
 
-    private Configuration configuration
-    private ProcessPrepare processPrepare
 
     Staging(def dsl) {
         super(dsl)
         dsl.echo "[INFO] load stage process"
-       // this.configuration = new Configuration(dsl)
-        //this.processPrepare = new ProcessPrepare(dsl, configuration)
+
     }
 
     def getCompiler() {

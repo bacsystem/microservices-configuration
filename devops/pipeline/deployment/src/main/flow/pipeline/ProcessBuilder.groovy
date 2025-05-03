@@ -28,10 +28,10 @@ class ProcessBuilder extends PipelineBase {
 
     private Configuration configuration
 
-    ProcessBuilder(def scriptInstance) {
-        super(scriptInstance)
-        scriptInstance.echo "[INFO] load builder process"
-        this.configuration = new Configuration(scriptInstance)
+    ProcessBuilder(def dsl) {
+        super(dsl)
+        dsl.echo "[INFO] load builder process"
+        this.configuration = new Configuration(dsl)
     }
 
     def prepare(String process, String solution) {
