@@ -32,7 +32,7 @@ class Staging extends PipelineBase {
     }
 
     def getCompiler() {
-        dsl.echo "[INFO] Detecting build tool based on repository files..."
+        Console("[INFO] Detecting build tool based on repository files...")
         def buildToolMap = [
                 'pom.xml'     : 'maven',
                 'build.gradle': 'gradle',
@@ -42,12 +42,12 @@ class Staging extends PipelineBase {
         ]
 
         for (entry in buildToolMap) {
-            if (dsl.fileExists(entry.key)) {
-                dsl.echo "[INFO] Build tool detected: ${entry.value}"
+            if (ExistFile(entry.key)) {
+                Console("[INFO] Build tool detected: ${entry.value}")
                 return entry.value
             }
         }
-        dsl.echo "[WARN] No recognized build tool found in repository."
+        Console("[WARN] No recognized build tool found in repository.")
         return null
     }
 

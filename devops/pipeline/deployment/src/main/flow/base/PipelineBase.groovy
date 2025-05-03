@@ -18,4 +18,13 @@ class PipelineBase implements IConstants {
     def getDsl() {
         return this.dsl
     }
+
+    def Console(String msg) {
+        this.dsl.echo msg
+    }
+
+    boolean ExistFile(String value) {
+        if (!value) return false
+        return dsl?.fileExists(value) ?: false
+    }
 }
