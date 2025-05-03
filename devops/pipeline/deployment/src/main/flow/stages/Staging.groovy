@@ -31,7 +31,7 @@ class Staging extends PipelineBase {
 
     }
 
-    def getCompiler() {
+    String getCompiler() {
         Console("[INFO] Detecting build tool based on repository files...")
         def buildToolMap = [
                 'pom.xml'     : 'maven',
@@ -41,14 +41,13 @@ class Staging extends PipelineBase {
                 'setup.py'    : 'python'
         ]
 
-        for (entry in buildToolMap) {
-            if (ExistFile(entry.key)) {
-                Console("[INFO] Build tool detected: ${entry.value}")
-                return entry.value
+        buildToolMap.each { key, value ->
+            if (ExistFile(key)) {
+                Console("[INFO] Build tool detected: ${value}")
+                return value
             }
+            return null
         }
-        Console("[WARN] No recognized build tool found in repository.")
-        return null
     }
 
     def build() {}
