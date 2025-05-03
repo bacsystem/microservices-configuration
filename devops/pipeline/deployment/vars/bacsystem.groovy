@@ -1,4 +1,5 @@
-//def call(Builder builder, boolean wout,boolean smc,String process, boolean opt) {
+import main.flow.stages.Staging
+
 def call(Map params = [:]) {
     echo "process ${params}"
     echo "process ${params.value}"
