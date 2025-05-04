@@ -39,7 +39,6 @@ enum Compiler {
         for (Compiler c : values()) {
             MAP.put(c.value(), c)
         }
-        //Stream.of(values()).collect(Collectors.toMap(a->))
     }
 
     String value() {
@@ -60,8 +59,12 @@ enum Compiler {
     }
 
     static List<String> compilers() {
+        /*
         return Arrays.asList(values()).stream()
                 .map { it.files() }
                 .collect(Collectors.toList())
+
+         */
+        return values().collect { it.files() }
     }
 }

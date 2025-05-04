@@ -51,10 +51,11 @@ class Utility {
 
     static String findCompiler(def dsl) {
         console("[INFO] find compiler to run the process", dsl)
-        String detected = Compiler.compilers().each { it ->
-            if (exist(it, dsl)) {
-                console("[INFO] Build tool detected: ${it}", dsl)
-                return true
+        String detected = null
+        for (String compiler : Compiler.compilers()) {
+            if (exist(compiler, dsl)) {
+                detected = compiler
+                break
             }
         }
         if (!detected) {
@@ -62,28 +63,6 @@ class Utility {
         }
 
         return detected
-        /*
-
-        def tools = [
-                'pom.xml'     : 'maven',
-                'build.gradle': 'gradle',
-                'go.mod'      : 'golang',
-                'package.json': 'nodejs',
-                'setup.py'    : 'python'
-        ]
-        tools.each { key, value ->
-            if (exist(key, dsl)) {
-                console("[INFO] Build tool detected: ${value}", dsl)
-                detected = value
-                return
-            }
-        }
-        if (detected == null) {
-            console("[WARN] No recognized build tool found in repository.", dsl)
-        }
-        return detected
-
-         */
     }
 
     static def workflow(String wf) {
