@@ -1,6 +1,6 @@
 package main.flow.global
 
-
+import groovy.transform.PackageScope
 import main.flow.base.PipelineBase
 
 /**
@@ -89,11 +89,12 @@ class Configuration extends PipelineBase {
      * @param path logical config path (unused here)
      * @return string content of config file
      */
+    //@PackageScope
     void execute() {
-
         writeToFile(configName, getResourceContent())
         this._dsl.sh "cat ./${configName}"
-        this._dsl.build("./$configName")
+
+        this._dsl.load("./$configName")
         //this._dsl.println("configTest=${this._dsl.TEST_CONFIG}")
     }
 
