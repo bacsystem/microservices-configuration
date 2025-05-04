@@ -34,13 +34,11 @@ def call(Map params = [:]) {
                     script {
                         // Call getParameters to get agent and solution project
                         (agentLabel, solutionProject) = staging.getParameters()
-
                         // Set fallback values if null
                         if (agentLabel == null) {
                             agentLabel = "principal"
                         }
                         echo "[INFO] Using agent: ${agentLabel} and solution project: ${solutionProject}"
-
 
                         // Directory listing (for debugging)
                         sh "ls -la"

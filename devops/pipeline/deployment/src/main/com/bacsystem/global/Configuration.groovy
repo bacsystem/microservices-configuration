@@ -1,7 +1,8 @@
 package main.com.bacsystem.global
 
-
 import main.com.bacsystem.base.PipelineBase
+
+import static main.com.bacsystem.utils.Utility.console
 
 /**
  * <b>Configuration</b>
@@ -31,7 +32,7 @@ class Configuration extends PipelineBase {
 
     Configuration(def dsl) {
         super(dsl)
-        dsl.echo "[INFO] load configuration process"
+        console("[INFO] load configuration process", dsl)
     }
 
     /**
@@ -40,7 +41,7 @@ class Configuration extends PipelineBase {
      * @return this for method chaining
      */
     Configuration withConfig(String configName) {
-        Console("[INFO] File environment configuration: ${configName}")
+        console("[INFO] File environment configuration: ${configName}", this._dsl)
         this.configName = configName
         return this
     }
@@ -100,13 +101,13 @@ class Configuration extends PipelineBase {
     // ========== Private Methods ==========
 
     private String getResourceContent() {
-        Console("[INFO] Get resource content")
+        console("[INFO] Get resource content", this._dsl)
         assert configName: "configName must be set before accessing content."
         return this._dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
     }
 
     private void writeToFile(String fileName, String content) {
-        Console("[INFO] Write file ${fileName}.")
+        console("[INFO] Write file ${fileName}.", this._dsl)
         this._dsl.writeFile(file: fileName, text: content)
     }
 }

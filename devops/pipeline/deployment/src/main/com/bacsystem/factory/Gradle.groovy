@@ -1,6 +1,7 @@
 package main.com.bacsystem.factory
 
-import main.com.bacsystem.utils.Utility
+
+import static main.com.bacsystem.utils.Utility.console
 
 /**
  * <b>Gradle</b>
@@ -32,7 +33,7 @@ class Gradle extends BuildFactory {
             dsl.sh "gradle wrapper"
         }
 
-        dsl.echo "[INFO] [gradle] Starting the construction of the component."
+        console("[INFO] [gradle] Starting the construction of the component.", dsl)
         // Prepare gradlew
         def propertyFile = 'properties.tmp'
         dsl.sh "chmod +x ./gradlew"
@@ -56,14 +57,14 @@ class Gradle extends BuildFactory {
         String solution = readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "app.solution")
         //dsl.env.SONAR_KEY      = "${readProperties(propertyFile,'group')}:${dsl.env.IMAGE}"
 
-        dsl.echo "[INFO] [gradle] Version the component. ${version}"
-        dsl.echo "[INFO] [gradle] Group the component. ${group}"
-        dsl.echo "[INFO] [gradle] Type the component. ${type}"
-        dsl.echo "[INFO] [gradle] Solution the component. ${solution}"
-        dsl.echo "[INFO] [gradle] Name the component. ${name}"
-        dsl.echo "[INFO] [gradle] Module the component. ${module}"
-        dsl.echo "[INFO] [gradle] Pipe the component. ${pipe}"
-        dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
+        // dsl.echo "[INFO] [gradle] Version the component. ${version}"
+        // dsl.echo "[INFO] [gradle] Group the component. ${group}"
+        // dsl.echo "[INFO] [gradle] Type the component. ${type}"
+        // dsl.echo "[INFO] [gradle] Solution the component. ${solution}"
+        // dsl.echo "[INFO] [gradle] Name the component. ${name}"
+        // dsl.echo "[INFO] [gradle] Module the component. ${module}"
+        // dsl.echo "[INFO] [gradle] Pipe the component. ${pipe}"
+        // dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
     }
 
     @Override

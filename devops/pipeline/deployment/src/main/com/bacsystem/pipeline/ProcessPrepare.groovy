@@ -5,6 +5,8 @@ import main.com.bacsystem.factory.BuildFactory
 import main.com.bacsystem.factory.CompilerFactory
 import main.com.bacsystem.global.Configuration
 
+import static main.com.bacsystem.utils.Utility.console
+
 /**
  * <b>Prepare</b>
  * <p>
@@ -31,20 +33,19 @@ class ProcessPrepare extends PipelineBase {
 
     ProcessPrepare(def dsl) {
         super(dsl)
-        dsl.echo "[INFO] load prepare process"
+        console("[INFO] load prepare process", dsl)
         this.configuration = new Configuration(dsl)
     }
 
     def init(String process, String solution, String compiler) {
         this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
         this.configuration.withConfig(STATIC_CONFIG).execute()
-        Console("[INFO] Init process prepare compiler factory with [${compiler}]")
+        console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
         def factory = CompilerFactory.getCompiler(compiler)
-        Console("[INFO] Process prepare compiler factory with [${factory}]")
+        console("[INFO] Process prepare compiler factory with [${factory}]", this._dsl)
         factory.build(this._dsl)
         BuildFactory.commit(this._dsl)
         BuildFactory.gitflow(this._dsl, process)
         BuildFactory.image(this._dsl, process)
     }
-
 }

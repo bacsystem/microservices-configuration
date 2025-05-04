@@ -1,7 +1,8 @@
 package main.com.bacsystem.stages
 
 import main.com.bacsystem.base.PipelineBase
-import main.com.bacsystem.utils.Utility
+
+import static main.com.bacsystem.utils.Utility.console
 
 /**
  * <b>Staging</b>
@@ -30,7 +31,7 @@ class Staging extends PipelineBase {
 
     Staging(def dsl) {
         super(dsl)
-        dsl.echo "[INFO] load stage process"
+        console("[INFO] load stage process", dsl)
         // this.processPrepare = new ProcessPrepare(dsl)
         //this.processTest = new ProcessTest(dsl)
     }
@@ -44,15 +45,15 @@ class Staging extends PipelineBase {
     }
 
     def getSetting(String process = "", String solution = "", String compiler) {
-        Console("[INFO] Iniciando construcción: Proceso: ${process}, Solución: ${solution}, Compilador: ${compiler}")
+        console("[INFO] Iniciando construcción: Proceso: ${process}, Solución: ${solution}, Compilador: ${compiler}", this._dsl)
         this.processPrepare.init(process, solution, compiler)
-        Console("[INFO] Construcción completada para ${solution} utilizando ${compiler}")
+        console("[INFO] Construcción completada para ${solution} utilizando ${compiler}", this._dsl)
     }
 
     def test(Map param = [:]) {
-        Console("[INFO] Init test process: env ${this._dsl.env.BRANCH_NAME}")
-        Console("[INFO] Init test process: env ${this._dsl.BRANCH_NAME}")
-        Console("[INFO] Init test process: env ${param}")
+        console("[INFO] Init test process: env ${this._dsl.env.BRANCH_NAME}", this._dsl)
+        console("[INFO] Init test process: env ${this._dsl.BRANCH_NAME}", this._dsl)
+        console("[INFO] Init test process: env ${param}", this._dsl)
         //this.processTest.init(param., "solution")
     }
 

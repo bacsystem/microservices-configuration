@@ -2,6 +2,8 @@ package main.com.bacsystem.pipeline
 
 import main.com.bacsystem.base.PipelineBase
 
+import static main.com.bacsystem.utils.Utility.console
+
 /**
  * <b>ProcessTest</b>
  * <p>
@@ -29,6 +31,6 @@ class ProcessTest extends PipelineBase {
 
 
     def init(String process, String solution) {
-        Console("[INFO] Init process prepare compiler factory with [${process}] and [${solution}]")
+        console("[INFO] Init process prepare compiler factory with [${process}] and [${solution}]",this._dsl)
     }
 }

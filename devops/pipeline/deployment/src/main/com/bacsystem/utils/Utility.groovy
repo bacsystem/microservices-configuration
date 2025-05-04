@@ -30,7 +30,7 @@ import main.com.bacsystem.constants.IConstants
 class Utility {
 
     static String repository(def dsl) {
-        dsl.echo "[INFO] SCM object: ${dsl.scm}"
+        console("[INFO] SCM object: ${dsl.scm}", dsl)
         if (dsl.scm == null || !dsl.scm.getUserRemoteConfigs()) {
             error "[ERROR] The object SCM is invalid o is empty 'userRemoteConfigs'"
         }
@@ -41,7 +41,7 @@ class Utility {
         }
         // Tokenize and extract repository name
         def repoName = repoUrl.tokenize('/').last().split("\\.")[0]
-        dsl.echo "[INFO] Extracted repository name: ${repoName}"
+        console("[INFO] Extracted repository name: ${repoName}", dsl)
         return repoName
     }
 
@@ -50,7 +50,7 @@ class Utility {
     }
 
     static def compiler(def dsl) {
-        dsl.echo "[INFO] Detecting build tool based on repository files..."
+        console("[INFO] Detecting build tool based on repository files...", dsl)
         def tools = [
                 'pom.xml'     : 'maven',
                 'build.gradle': 'gradle',
@@ -61,13 +61,13 @@ class Utility {
         def detected = null
         tools.each { key, value ->
             if (existObject(key, dsl)) {
-                dsl.echo "[INFO] Build tool detected: ${value}"
+                console("[INFO] Build tool detected: ${value}", dsl)
                 detected = value
                 return
             }
         }
         if (detected == null) {
-            dsl.echo "[WARN] No recognized build tool found in repository."
+            console("[WARN] No recognized build tool found in repository.", dsl)
         }
         return detected
     }
@@ -77,7 +77,7 @@ class Utility {
     }
 
     static def params(def dsl) {
-        dsl.echo "[INFO] Get parameters for deployment."
+        console("[INFO] Get parameters for deployment.", dsl)
         def deployDir = 'deploy-config'
         def configRepo = 'https://github.com/dbacilio88/microservices-configuration.git'
         def credentialsId = 'github-jenkins-ssh'
@@ -94,10 +94,10 @@ class Utility {
         }
 
         String repoName = repository(dsl)
-        dsl.echo "[INFO] Detected repository name: ${repoName}"
+        console("[INFO] Detected repository name: ${repoName}", dsl)
 
         // Read the YAML file
-        if (!existObject(configFilePath, dsl)) {
+        if (!exist(configFilePath, dsl)) {
             error "[ERROR] Configuration file not found: ${configFilePath}"
         }
 
@@ -113,19 +113,20 @@ class Utility {
             error "[ERROR] No configuration found for application '${repoName}' in the YAML"
         }
 
-        def agentLabel = appData.agent ?: 'default-agent'
+        def agent = appData.agent ?: 'default-agent'
 
-        def solutionProject = appData.group ?: 'default-group'
+        def solution = appData.group ?: 'default-group'
 
-        dsl.echo "[INFO] Parameters obtained: agent='${agentLabel}', group='${solutionProject}'"
-
-        return [agentLabel, solutionProject]
+        console("[INFO] Parameters obtained: agent='${agent}', solution='${solution}'", dsl)
+        return [agent, solution]
     }
 
-    static boolean existObject(String path, def dsl) {
+    static boolean exist(String path, def dsl) {
         if (!path) return false
         return dsl?.fileExists(path) ?: false
     }
 
-
+    static void console(String msg, def dsl) {
+        dsl.echo msg
+    }
 }

@@ -3,6 +3,8 @@ package main.com.bacsystem.pipeline
 import main.com.bacsystem.base.PipelineBase
 import main.com.bacsystem.global.Configuration
 
+import static main.com.bacsystem.utils.Utility.console
+
 /**
  * <b>Builder</b>
  * <p>
@@ -30,7 +32,7 @@ class ProcessBuilder extends PipelineBase {
 
     ProcessBuilder(def dsl) {
         super(dsl)
-        dsl.echo "[INFO] load builder process"
+        console("[INFO] load builder process", dsl)
         this.configuration = new Configuration(dsl)
     }
 
