@@ -3,7 +3,7 @@ import main.com.bacsystem.utils.Utility
 
 def call(Map params = [:]) {
     echo "process ${params}"
-    echo "process ${params.value}"
+    echo "process ${params.process}"
 
     def staging = new Staging(params.dsl)
 
