@@ -52,12 +52,14 @@ class Utility {
     static String findCompiler(def dsl) {
         console("[INFO] find compiler to run the process", dsl)
         String detected = null
-        for (String compiler : Compiler.compilers()) {
-            if (exist(compiler, dsl)) {
-                detected = compiler
-                break
+
+        Compiler.compilerFiles().each { key, value ->
+            if (exist(key, dsl)) {
+                detected = key
+                return
             }
         }
+
         if (!detected) {
             console("[WARN] No recognized build tool found in repository.", dsl)
         }
