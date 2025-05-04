@@ -1,6 +1,7 @@
 package main.flow.stages
 
 import main.flow.base.PipelineBase
+import main.flow.global.Configuration
 import main.flow.pipeline.ProcessPrepare
 import main.flow.utils.Utility
 
@@ -27,7 +28,6 @@ class Staging extends PipelineBase {
     static final long serialVersionUID = 1
 
     private ProcessPrepare processPrepare
-
 
     Staging(def dsl) {
         super(dsl)

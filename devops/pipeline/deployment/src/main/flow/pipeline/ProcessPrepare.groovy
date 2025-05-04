@@ -34,6 +34,11 @@ class ProcessPrepare extends PipelineBase {
     }
 
     def init(String process, String solution, String compiler) {
+
+        Console("[INFO] stage ${this._dsl.env.STAGE_NAME}")
+
+        this.configuration.withConfig(STATIC_CONFIG).execute()
+
         Console("[INFO] Init process prepare compiler factory with [${compiler}]")
         def factory = CompilerFactory.getCompiler(compiler)
         Console("[INFO] Process prepare compiler factory with [${factory}]")

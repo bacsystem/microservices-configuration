@@ -1,6 +1,6 @@
 package main.flow.global
 
-import groovy.transform.PackageScope
+
 import main.flow.base.PipelineBase
 
 /**
@@ -88,22 +88,23 @@ class Configuration extends PipelineBase {
      * @param path logical config path (unused here)
      * @return string content of config file
      */
-    // @PackageScope
-    public void execute() {
+    void execute() {
         writeToFile(configName, getResourceContent())
-        dsl.sh "cat ./${configName}"
-        dsl.build("./$configName")
-        dsl.println("configTest=${dsl.TEST_CONFIG}")
+        this._dsl.sh "cat ./${configName}"
+        this._dsl.build("./$configName")
+        this._dsl.println("configTest=${dsl.TEST_CONFIG}")
     }
 
     // ========== Private Methods ==========
 
     private String getResourceContent() {
+        Console("[INFO] Get resource content")
         assert configName: "configName must be set before accessing content."
-        return dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
+        return this._dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
     }
 
     private void writeToFile(String fileName, String content) {
-        dsl.writeFile(file: fileName, text: content)
+        Console("[INFO] Write file ${fileName}.")
+        this._dsl.writeFile(file: fileName, text: content)
     }
 }
