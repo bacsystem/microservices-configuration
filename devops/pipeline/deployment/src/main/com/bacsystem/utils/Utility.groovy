@@ -50,7 +50,8 @@ class Utility {
     }
 
     static String findCompiler(def dsl) {
-        String detected = Compiler.list().each { it ->
+        console("[INFO] find compiler to run the process", dsl)
+        String detected = Compiler.compilers().each { it ->
             if (exist(it, dsl)) {
                 console("[INFO] Build tool detected: ${it}", dsl)
                 return true

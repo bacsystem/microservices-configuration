@@ -55,7 +55,7 @@ enum Compiler {
         return MAP.get(file)
     }
 
-    static List<String> list() {
+    static List<String> compilers() {
         return values().collect { it.files() }
 
     }
