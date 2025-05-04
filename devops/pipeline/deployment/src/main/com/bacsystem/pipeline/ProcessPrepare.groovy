@@ -39,7 +39,6 @@ class ProcessPrepare extends PipelineBase {
     }
 
     def init(String process, String solution) {
-
         console("[INFO] Starting jenkins preparation process", this._dsl)
         this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
         this.configuration.withConfig(STATIC_CONFIG).execute()
@@ -47,9 +46,9 @@ class ProcessPrepare extends PipelineBase {
         console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
 
         def compilerFactory = CompilerFactory.getCompiler(compiler)
-        console("[INFO] compiler factory [${compilerFactory}]")
+        console("[INFO] compiler factory [${compilerFactory}]", this._dsl)
         def flowFactory = FlowFactory.getFlowFactory(process)
-        console("[INFO] flow factory [${flowFactory}]")
+        console("[INFO] flow factory [${flowFactory}]", this._dsl)
 
         // def factory = CompilerFactory.getCompiler(compiler)
         // console("[INFO] Process prepare compiler factory with [${factory}]", this._dsl)
