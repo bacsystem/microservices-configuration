@@ -36,7 +36,7 @@ class Gradle extends BuildFactory {
         String group = readProperties(propertyFile, "version", dsl)
         String type = readProperties(propertyFile, "type", dsl)
         String solution = readProperties(propertyFile, "solution", dsl) ? readProperties(propertyFile, "solution", dsl) : readProperties(propertyFile, "app.solution", dsl)
-        String name = Utility.repository(dsl.scm)
+        String name = Utility.repository(dsl)
 
         dsl.echo "[INFO] [gradle] Version the component. ${version}"
         dsl.echo "[INFO] [gradle] Group the component. ${group}"
