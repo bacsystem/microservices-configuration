@@ -32,7 +32,7 @@ class Staging extends PipelineBase {
 
     Staging(def dsl) {
         super(dsl)
-        console("[INFO] load stage process", dsl)
+        //console("[INFO] load stage process", dsl)
         // this.processPrepare = new ProcessPrepare(dsl)
         //this.processTest = new ProcessTest(dsl)
     }
