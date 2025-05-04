@@ -47,6 +47,46 @@ class Configuration extends PipelineBase {
     }
 
     /**
+     * Returns the raw contents of the configuration file.
+     * @param path logical config path (unused here)
+     * @return string content of config file
+     */
+    void execute() {
+        writeToFile(configName, getResourceContent())
+        this._dsl.sh "cat ./${configName}"
+
+        def envVars = this._dsl.sh(script: """#!/bin/bash
+            set -a
+            source ${configName}
+            set +a
+            env
+            """, returnStdout: true).split("\n")
+
+        envVars.each {
+            if (it.contains("=")) {
+                def (key, value) = it.tokenize("=")
+                this._dsl.env[key] = value
+            }
+        }
+
+        //this._dsl.load("./$configName")
+        this._dsl.echo "configTest=${this._dsl.env.TEST_CONFIG}"
+    }
+
+    // ========== Private Methods ==========
+
+    private String getResourceContent() {
+        console("[INFO] Get resource content", this._dsl)
+        assert configName: "configName must be set before accessing content."
+        return this._dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
+    }
+
+    private void writeToFile(String fileName, String content) {
+        console("[INFO] Write file ${fileName}.", this._dsl)
+        this._dsl.writeFile(file: fileName, text: content)
+    }
+
+    /**
      * Loads the configuration content and writes it into a target file.
      * @param targetFile Target file name in the workspace. If null, uses configName.
      * @return this
@@ -85,52 +125,5 @@ class Configuration extends PipelineBase {
         return dsl.libraryResource("${CONFIG_PATH_BASE}/${configName}")
     }
 
-    /**
-     * Returns the raw contents of the configuration file.
-     * @param path logical config path (unused here)
-     * @return string content of config file
-     */
-    //@PackageScope
-    void execute() {
-        writeToFile(configName, getResourceContent())
-        this._dsl.sh "cat ./${configName}"
 
-        def envVars = this._dsl.sh(script: """#!/bin/bash
-            set -a
-            source ${configName}
-            set +a
-            env
-            """, returnStdout: true).split("\n")
-
-        envVars.each {
-            if (it.contains("=")) {
-                def (key, value) = it.tokenize("=")
-                this._dsl.env[key] = value
-            }
-        }
-
-        /*
-        this._dsl.sh """
-            set -a
-            . ./${configName}
-            set +a
-        """
-         */
-        //this._dsl.load("./$configName")
-        this._dsl.echo "configTest=${this._dsl.TEST_CONFIG}"
-        this._dsl.echo "configTest=${this._dsl.env.TEST_CONFIG}"
-    }
-
-    // ========== Private Methods ==========
-
-    private String getResourceContent() {
-        console("[INFO] Get resource content", this._dsl)
-        assert configName: "configName must be set before accessing content."
-        return this._dsl.libraryResource("${CONFIG_BASE_PATH}/${configName}")
-    }
-
-    private void writeToFile(String fileName, String content) {
-        console("[INFO] Write file ${fileName}.", this._dsl)
-        this._dsl.writeFile(file: fileName, text: content)
-    }
 }
