@@ -1,9 +1,9 @@
-package main.com.bacsystem.factory.flow
+package main.com.bacsystem.factory.compiler
 
 /**
- * <b>BuildFlow</b>
+ * <b>Compiler</b>
  * <p>
- * This class specifies the requirements for the {@link BuildFlow} component,
+ * This class specifies the requirements for the {@link ICompilerFactory} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -17,8 +17,6 @@ package main.com.bacsystem.factory.flow
  */
 
 
-abstract class BuildFlow {
-
-    abstract void flow(def dsl, def type)
-
+abstract class ICompilerFactory {
+    abstract void compiler(def dsl)
 }

@@ -1,4 +1,7 @@
-package main.com.bacsystem.factory
+package main.com.bacsystem.factory.compiler
+
+import main.com.bacsystem.factory.compiler.pkg.Gradle
+import main.com.bacsystem.factory.compiler.pkg.Maven
 
 /**
  * <b>CompilerFactory</b>
@@ -19,11 +22,13 @@ package main.com.bacsystem.factory
 
 class CompilerFactory {
 
-    static BuildFactory getCompiler(String type){
-        switch (type.toLowerCase()){
+    static ICompilerFactory getCompiler(String type) {
+        switch (type.toLowerCase()) {
             case "gradle":
                 return new Gradle()
-            default :
+            case "maven":
+                return new Maven()
+            default:
                 error ""
         }
     }

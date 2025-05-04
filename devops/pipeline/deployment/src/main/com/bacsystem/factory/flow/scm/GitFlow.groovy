@@ -1,9 +1,11 @@
-package main.com.bacsystem.factory
+package main.com.bacsystem.factory.flow.scm
+
+import main.com.bacsystem.factory.flow.IFlowFactory
 
 /**
- * <b>Golang</b>
+ * <b>GitFlow</b>
  * <p>
- * This class specifies the requirements for the {@link Golang} component,
+ * This class specifies the requirements for the {@link GitFlow} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -13,19 +15,15 @@ package main.com.bacsystem.factory
  *
  * @author christian
  * @author dbacilio88@outlook.es
- * @since 3/05/2025
+ * @since 4/05/2025
  */
 
 
-class Golang extends BuildFactory {
+class GitFlow extends IFlowFactory {
 
     @Override
-    void build(def dsl) {
-
-    }
-
-    @Override
-    void registry(Object dsl) {
-
+    void flow(def dsl, def type) {
+        commit(dsl)
+        tags(dsl)
     }
 }

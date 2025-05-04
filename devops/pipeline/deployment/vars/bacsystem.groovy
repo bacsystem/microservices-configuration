@@ -1,7 +1,5 @@
 import main.com.bacsystem.stages.Staging
 
-import static main.com.bacsystem.utils.Utility.flowType
-
 def call(Map params = [:]) {
 
     def staging = new Staging(params.dsl)
@@ -34,7 +32,7 @@ def call(Map params = [:]) {
 
                         echo "[INFO] Searching parameters in config deploy file."
 
-                        (agentLabel, solutionProject) = staging.getParameters()
+                        (agentLabel, solutionProject) = staging.parameters()
 
                         if (agentLabel == null) {
                             agentLabel = "principal"
@@ -44,14 +42,14 @@ def call(Map params = [:]) {
 
                         sh "ls -la"
 
-                        echo "[INFO] Lookup jenkins workflow type -> [${params.process}]"
+                        echo "[INFO] Lookup jenkins workflow type -> [${params.workflow}]"
+                        staging.settings(param: params, solution: solutionProject)
 
-                        String flowType = flowType("${params.process}")
+                        //echo "[INFO] Find the type of compiler to work with jenkins"
+                        //String compiler = staging.getCompiler()
+                        //echo "[INFO] Detected build tool: ${compiler}"
+                        //staging.getFlow(flowType)
 
-                        echo "[INFO] Find the type of compiler to work with jenkins"
-                        String compiler = staging.getCompiler()
-                        echo "[INFO] Detected build tool: ${compiler}"
-                        staging.getFlow(flowType)
 /*
 
                         if (compiler != null) {

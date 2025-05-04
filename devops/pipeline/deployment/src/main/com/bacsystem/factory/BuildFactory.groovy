@@ -1,7 +1,6 @@
 package main.com.bacsystem.factory
 
 import main.com.bacsystem.constants.IConstants
-import main.com.bacsystem.enums.PipelineProcess
 
 /**
  * <b>LoadFactory</b>
@@ -26,64 +25,6 @@ abstract class BuildFactory {
 
 
     abstract void registry(def dsl)
-
-
-    static void commit(def dsl) {
-        def logger = { param -> dsl.sh(returnStdout: true, script: param) }
-
-        dsl.env.REPOSITORY_EMAIL = logger('git --no-pager show -s --format=\'%ae\' --ignore-cr-at-eol').trim()
-        dsl.env.LAST_COMMIT = logger('if [ -d .github ] ; then if test -f .github/.lastCommit ; then cat .github/.lastCommit; else echo "0" > .github/.lastCommit; echo "0"; fi; else echo "0"; fi').trim()
-        dsl.env.BUILD_GIT_NR = logger('git rev-list --count --all --skip $LAST_COMMIT').trim()
-        dsl.env.COMMITID = logger('git log --format=\'%h\' -n1').take(4)
-
-        dsl.env.PREFIX = ".B${dsl.env.COMMITID}"
-        dsl.env.PREFIX_DISPLAY = ".B${dsl.env.COMMITID}"
-        dsl.env.DISPLAY = ".B${dsl.env.COMMITID}"
-
-        dsl.echo "REPOSITORY_EMAIL: ${dsl.env.REPOSITORY_EMAIL}"
-        dsl.echo "LAST_COMMIT: ${dsl.env.LAST_COMMIT}"
-        dsl.echo "BUILD_GIT_NR: ${dsl.env.BUILD_GIT_NR}"
-        dsl.echo "COMMITID: ${dsl.env.COMMITID}"
-        dsl.echo "PREFIX: ${dsl.env.PREFIX}"
-        dsl.echo "PREFIX_DISPLAY: ${dsl.env.PREFIX_DISPLAY}"
-        dsl.echo "DISPLAY: ${dsl.env.DISPLAY}"
-    }
-
-    static void gitflow(def dsl, String process) {
-
-        def branchName = dsl.env.BRANCH_NAME
-
-        switch (process) {
-            case PipelineProcess.PROCESS.value():
-                if (branchName.startsWith("fix")) {
-                    dsl.env.PREFIX = "-fix" + "${dsl.env.PREFIX}"
-                }
-                if (branchName.startsWith("release")) {
-                    dsl.env.PREFIX = "-rls" + "${dsl.env.PREFIX}"
-                }
-
-                if (branchName == "master" || branchName == "main") {
-                    dsl.env.PREFIX = ""
-                }
-                if (branchName == "release") {
-                    dsl.env.PREFIX = "-alpha"
-                }
-                if (branchName == "deploy-uat") {
-                    dsl.env.PREFIX = "-beta"
-                }
-                if (branchName.startsWith("fix/") || branchName.startsWith("bugfix/") || branchName.startsWith("hotfix/")) {
-                    dsl.env.PREFIX = "-alpha"
-                }
-
-                dsl.env.DISPLAY = ""
-
-                dsl.echo "PREFIX: ${dsl.env.PREFIX}"
-                dsl.echo "DISPLAY: ${dsl.env.DISPLAY}"
-                break
-            default:
-                dsl.echo("Gitflow process '${process}' is not configured")
-        }
-    }
 
     static void image(def dsl, String process) {
         def env = dsl.env

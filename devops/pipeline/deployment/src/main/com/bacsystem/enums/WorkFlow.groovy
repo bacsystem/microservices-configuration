@@ -2,7 +2,7 @@ package main.com.bacsystem.enums
 /**
  * <b>PipelineProcess</b>
  * <p>
- * This class specifies the requirements for the {@link PipelineProcess} component,
+ * This class specifies the requirements for the {@link WorkFlow} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -16,11 +16,14 @@ package main.com.bacsystem.enums
  */
 
 
-enum PipelineProcess {
-    PROCESS("Gitflow");
+enum WorkFlow {
+    GIT_FLOW("Gitflow"),
+    GITHUB_FLOW("GithubFlow"),
+    GITLAB_FLOW("GitlabFlow");
+
     private String value
 
-    PipelineProcess(String value) {
+    WorkFlow(String value) {
         this.value = value
     }
 

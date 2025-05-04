@@ -1,7 +1,7 @@
 package main.com.bacsystem.utils
 
-
-import main.com.bacsystem.enums.PipelineProcess
+import main.com.bacsystem.enums.Compiler
+import main.com.bacsystem.enums.WorkFlow
 
 /**
  * <b>Utility</b>
@@ -49,7 +49,23 @@ class Utility {
         return dsl.readYaml(file: file)
     }
 
-    static def findCompiler(def dsl) {
+    static String findCompiler(def dsl) {
+        String detected = null
+
+        Compiler.list().each { it ->
+            if (exist(it, dsl)) {
+                console("[INFO] Build tool detected: ${it}", dsl)
+                detected = it
+                return
+            }
+        }
+        if (detected == null) {
+            console("[WARN] No recognized build tool found in repository.", dsl)
+        }
+
+        return detected
+        /*
+
         def tools = [
                 'pom.xml'     : 'maven',
                 'build.gradle': 'gradle',
@@ -57,7 +73,6 @@ class Utility {
                 'package.json': 'nodejs',
                 'setup.py'    : 'python'
         ]
-        def detected = null
         tools.each { key, value ->
             if (exist(key, dsl)) {
                 console("[INFO] Build tool detected: ${value}", dsl)
@@ -69,10 +84,12 @@ class Utility {
             console("[WARN] No recognized build tool found in repository.", dsl)
         }
         return detected
+
+         */
     }
 
-    static def flowType(String process) {
-        return PipelineProcess.get(process)
+    static def workflow(String wf) {
+        return WorkFlow.get(wf)
     }
 
     static def findParams(def dsl) {

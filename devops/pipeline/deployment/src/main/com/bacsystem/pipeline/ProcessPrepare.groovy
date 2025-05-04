@@ -1,6 +1,9 @@
 package main.com.bacsystem.pipeline
 
 import main.com.bacsystem.base.PipelineBase
+import main.com.bacsystem.global.Configuration
+
+import static main.com.bacsystem.utils.Utility.findCompiler
 
 /**
  * <b>Prepare</b>
@@ -24,25 +27,25 @@ class ProcessPrepare extends PipelineBase {
     static final long serialVersionUID = 1
 
     private static final String STATIC_CONFIG = "static_environment.env"
-    //private Configuration configuration
+    private Configuration configuration
 
     ProcessPrepare(def dsl) {
         super(dsl)
         dsl.echo "[INFO] load prepare process"
-        // this.configuration = new Configuration(dsl)
-    }
-/*
-    def init(String process, String solution, String compiler) {
-        this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
-        this.configuration.withConfig(STATIC_CONFIG).execute()
-        console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
-        def factory = CompilerFactory.getCompiler(compiler)
-        console("[INFO] Process prepare compiler factory with [${factory}]", this._dsl)
-        factory.build(this._dsl)
-        BuildFactory.commit(this._dsl)
-        BuildFactory.gitflow(this._dsl, process)
-        BuildFactory.image(this._dsl, process)
+        this.configuration = new Configuration(dsl)
     }
 
- */
+    def init(String process, String solution) {
+        this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
+        this.configuration.withConfig(STATIC_CONFIG).execute()
+        String compiler = findCompiler(this._dsl)
+        console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
+       // def factory = CompilerFactory.getCompiler(compiler)
+       // console("[INFO] Process prepare compiler factory with [${factory}]", this._dsl)
+        //factory.build(this._dsl)
+        //BuildFactory.commit(this._dsl)
+       // BuildFactory.gitflow(this._dsl, process)
+       // BuildFactory.image(this._dsl, process)
+    }
+
 }

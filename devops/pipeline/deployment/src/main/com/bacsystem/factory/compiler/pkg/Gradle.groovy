@@ -1,5 +1,6 @@
-package main.com.bacsystem.factory
+package main.com.bacsystem.factory.compiler.pkg
 
+import main.com.bacsystem.factory.BuildFactory
 
 import static main.com.bacsystem.utils.Utility.console
 
@@ -65,6 +66,8 @@ class Gradle extends BuildFactory {
         // dsl.echo "[INFO] [gradle] Module the component. ${module}"
         // dsl.echo "[INFO] [gradle] Pipe the component. ${pipe}"
         // dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
+
+        //validar la version y el agente de jdk  y docker
     }
 
     @Override

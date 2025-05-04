@@ -1,9 +1,11 @@
-package main.com.bacsystem.factory
+package main.com.bacsystem.factory.compiler.pkg
+
+import main.com.bacsystem.factory.BuildFactory
 
 /**
- * <b>Maven</b>
+ * <b>Golang</b>
  * <p>
- * This class specifies the requirements for the {@link Maven} component,
+ * This class specifies the requirements for the {@link Golang} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -17,10 +19,10 @@ package main.com.bacsystem.factory
  */
 
 
-class Maven extends BuildFactory {
+class Golang extends BuildFactory {
+
     @Override
     void build(def dsl) {
-        def pom = dsl.readMavenPom()
 
     }
 

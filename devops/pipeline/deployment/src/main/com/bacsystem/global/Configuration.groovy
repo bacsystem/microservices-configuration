@@ -32,7 +32,7 @@ class Configuration extends PipelineBase {
 
     Configuration(def dsl) {
         super(dsl)
-        console("[INFO] load configuration process", dsl)
+        dsl.echo "[INFO] load configuration process"
     }
 
     /**

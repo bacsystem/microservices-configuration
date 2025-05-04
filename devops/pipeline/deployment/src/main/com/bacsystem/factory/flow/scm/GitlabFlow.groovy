@@ -1,9 +1,11 @@
-package main.com.bacsystem.factory.flow
+package main.com.bacsystem.factory.flow.scm
+
+import main.com.bacsystem.factory.flow.IFlowFactory
 
 /**
- * <b>GitFlow</b>
+ * <b>GitlabFlow</b>
  * <p>
- * This class specifies the requirements for the {@link GitFlow} component,
+ * This class specifies the requirements for the {@link GitlabFlow} component,
  * developed in accordance with the development standards established by christian.
  * Collaboration is encouraged for the enhancement and expansion of the deployment.
  * </p>
@@ -17,11 +19,10 @@ package main.com.bacsystem.factory.flow
  */
 
 
-class GitFlow extends BuildFlow {
-
+class GitlabFlow extends IFlowFactory {
     @Override
-    void flow(def dsl, def type) {
-
-
+    void flow(Object dsl, Object type) {
+        commit(dsl)
+        tags(dsl)
     }
 }
