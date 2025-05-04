@@ -94,6 +94,10 @@ abstract class BuildFactory {
             case IConstants.PipelineProcess.PROCESS.value():
                 if (branch == "master" || branch == "main") {
                     env.ENVIRONMENT = "dev"
+                } else if (branch == "test") {
+                    env.ENVIRONMENT = "test"
+                } else if (branch == "uat") {
+                    env.ENVIRONMENT = "uat"
                 } else if (branch.startsWith("release/")) {
                     env.ENVIRONMENT = "test"
                 }
