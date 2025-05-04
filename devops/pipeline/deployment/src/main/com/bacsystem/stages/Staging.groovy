@@ -1,8 +1,6 @@
 package main.com.bacsystem.stages
 
 import main.com.bacsystem.base.PipelineBase
-import main.com.bacsystem.pipeline.ProcessPrepare
-import main.com.bacsystem.pipeline.ProcessTest
 import main.com.bacsystem.utils.Utility
 
 /**
@@ -27,14 +25,14 @@ class Staging extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
 
-    private ProcessPrepare processPrepare
-    private ProcessTest processTest
+    //private ProcessPrepare processPrepare
+    //private ProcessTest processTest
 
     Staging(def dsl) {
         super(dsl)
         dsl.echo "[INFO] load stage process"
-        this.processPrepare = new ProcessPrepare(dsl)
-        this.processTest = new ProcessTest(dsl)
+        // this.processPrepare = new ProcessPrepare(dsl)
+        //this.processTest = new ProcessTest(dsl)
     }
 
     def getParameters() {
