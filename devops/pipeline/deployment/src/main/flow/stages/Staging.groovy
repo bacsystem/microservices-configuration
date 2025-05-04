@@ -1,6 +1,7 @@
 package main.flow.stages
 
 import main.flow.base.PipelineBase
+import main.flow.pipeline.ProcessPrepare
 import main.flow.utils.Utility
 
 /**
@@ -25,11 +26,13 @@ class Staging extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
 
+    private ProcessPrepare processPrepare
+
 
     Staging(def dsl) {
         super(dsl)
         dsl.echo "[INFO] load stage process"
-
+        this.processPrepare = new ProcessPrepare(dsl)
     }
 
     def deployParams() {
@@ -109,6 +112,7 @@ class Staging extends PipelineBase {
     def getBuild(String process = "", String solution = "", String compiler) {
         Console("[INFO] Iniciando construcción: Proceso: ${process}, Solución: ${solution}, Compilador: ${compiler}")
         Console("[INFO] Construcción completada para ${solution} utilizando ${compiler}")
+        this.processPrepare.init(process, solution, compiler)
     }
 
     def test() {}
