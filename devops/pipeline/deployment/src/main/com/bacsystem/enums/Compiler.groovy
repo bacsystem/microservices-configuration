@@ -1,8 +1,4 @@
 package main.com.bacsystem.enums
-
-
-import java.util.stream.Collectors
-
 /**
  * <b>Compiler</b>
  * <p>
@@ -60,8 +56,7 @@ enum Compiler {
     }
 
     static List<String> list() {
-        return List.of(values()).stream()
-                .map(i -> i.files())
-                .collect(Collectors.toList())
+        return values().collect { it.files() }
+
     }
 }

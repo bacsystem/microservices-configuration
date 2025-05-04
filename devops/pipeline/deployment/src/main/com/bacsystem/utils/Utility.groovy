@@ -50,16 +50,13 @@ class Utility {
     }
 
     static String findCompiler(def dsl) {
-        String detected = null
-
-        Compiler.list().each { it ->
+        String detected = Compiler.list().each { it ->
             if (exist(it, dsl)) {
                 console("[INFO] Build tool detected: ${it}", dsl)
-                detected = it
-                return
+                return true
             }
         }
-        if (detected == null) {
+        if (!detected) {
             console("[WARN] No recognized build tool found in repository.", dsl)
         }
 
