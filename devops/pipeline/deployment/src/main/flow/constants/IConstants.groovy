@@ -30,7 +30,7 @@ interface IConstants extends Serializable {
     }
 
     enum PipelineProcess {
-        PROCESS("v1")
+        PROCESS("GitFlow")
         private String value
 
         PipelineProcess(String value) {
