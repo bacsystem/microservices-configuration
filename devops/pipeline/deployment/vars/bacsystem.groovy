@@ -59,6 +59,7 @@ def call(Map params = [:]) {
 
             stage('Unit Test') {
                 steps {
+                    echo "Unit Branch... ${ BRANCH_NAME}"
                     echo "Unit Test... ${ ENVIRONMENT}"
                 }
             }
