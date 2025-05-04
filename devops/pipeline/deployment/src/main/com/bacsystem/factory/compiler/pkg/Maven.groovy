@@ -1,6 +1,7 @@
 package main.com.bacsystem.factory.compiler.pkg
 
-import main.com.bacsystem.factory.BuildFactory
+
+import main.com.bacsystem.factory.compiler.ICompilerFactory
 
 /**
  * <b>Maven</b>
@@ -19,15 +20,9 @@ import main.com.bacsystem.factory.BuildFactory
  */
 
 
-class Maven extends BuildFactory {
+class Maven extends ICompilerFactory {
     @Override
-    void build(def dsl) {
+    void compiler(Object dsl) {
         def pom = dsl.readMavenPom()
-
-    }
-
-    @Override
-    void registry(Object dsl) {
-
     }
 }

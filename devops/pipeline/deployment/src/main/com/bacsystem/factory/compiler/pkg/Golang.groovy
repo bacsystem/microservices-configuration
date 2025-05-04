@@ -1,6 +1,7 @@
 package main.com.bacsystem.factory.compiler.pkg
 
-import main.com.bacsystem.factory.BuildFactory
+
+import main.com.bacsystem.factory.compiler.ICompilerFactory
 
 /**
  * <b>Golang</b>
@@ -19,15 +20,11 @@ import main.com.bacsystem.factory.BuildFactory
  */
 
 
-class Golang extends BuildFactory {
+class Golang extends ICompilerFactory {
+
 
     @Override
-    void build(def dsl) {
-
-    }
-
-    @Override
-    void registry(Object dsl) {
+    void compiler(Object dsl) {
 
     }
 }

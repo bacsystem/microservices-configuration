@@ -46,12 +46,11 @@ class ProcessPrepare extends PipelineBase {
         console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
 
         def compilerFactory = CompilerFactory.getCompiler(compiler)
-        console("[INFO] compiler factory [${compilerFactory}]", this._dsl)
+        console("[INFO] Process prepare compiler factory with [${compilerFactory}]", this._dsl)
+        compilerFactory.compiler(compiler)
         def flowFactory = FlowFactory.getFlowFactory(process)
-        console("[INFO] flow factory [${flowFactory}]", this._dsl)
-
-        // def factory = CompilerFactory.getCompiler(compiler)
-        // console("[INFO] Process prepare compiler factory with [${factory}]", this._dsl)
+        console("[INFO] Process flowr factory with [${flowFactory}]", this._dsl)
+        flowFactory.flow(this._dsl, process)
         //factory.build(this._dsl)
         //BuildFactory.commit(this._dsl)
         // BuildFactory.gitflow(this._dsl, process)

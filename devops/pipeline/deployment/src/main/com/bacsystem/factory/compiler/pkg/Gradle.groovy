@@ -1,8 +1,10 @@
 package main.com.bacsystem.factory.compiler.pkg
 
-import main.com.bacsystem.factory.BuildFactory
+
+import main.com.bacsystem.factory.compiler.ICompilerFactory
 
 import static main.com.bacsystem.utils.Utility.console
+import static main.com.bacsystem.utils.Utility.exist
 
 /**
  * <b>Gradle</b>
@@ -21,16 +23,18 @@ import static main.com.bacsystem.utils.Utility.console
  */
 
 
-class Gradle extends BuildFactory {
+class Gradle extends ICompilerFactory {
 
     @Override
-    void build(def dsl) {
-        dsl.COMPILER = "gradle"
-        dsl.IS_MAVEN_COMPILER = false
-        dsl.COMPILER_BASE = "sh gradlew"
+    void compiler(Object dsl) {
+
+        dsl.env.COMPILER = "gradle"
+        dsl.env.IS_MAVEN_COMPILER = false
+        dsl.env.COMPILER_BASE = "sh gradlew"
+
         //dsl.env.GRADLE_USER_HOME = "${dsl.env.JENKINS_HOME}/.gradle"
 
-        if (!dsl.fileExists("./gradle/wrapper/gradle-wrapper.jar")) {
+        if (!exist("./gradle/wrapper/gradle-wrapper.jar")) {
             dsl.sh "gradle wrapper"
         }
 
@@ -41,6 +45,11 @@ class Gradle extends BuildFactory {
         //dsl.sh "./gradlew -q properties"
         dsl.sh "./gradlew -q properties > ${propertyFile}"
 
+        readParameter(dsl)
+        //validar la version y el agente de jdk  y docker
+    }
+
+    void readParameter(def dsl) {
         def readProperties = { file, property ->
             return dsl.sh(script: "cat ${file} | grep '${property}:' | awk '{print \$2}'", returnStdout: true).trim()
         }
@@ -57,22 +66,14 @@ class Gradle extends BuildFactory {
         String type = readProperties(propertyFile, "type")
         String solution = readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "app.solution")
         //dsl.env.SONAR_KEY      = "${readProperties(propertyFile,'group')}:${dsl.env.IMAGE}"
-
-        // dsl.echo "[INFO] [gradle] Version the component. ${version}"
-        // dsl.echo "[INFO] [gradle] Group the component. ${group}"
-        // dsl.echo "[INFO] [gradle] Type the component. ${type}"
-        // dsl.echo "[INFO] [gradle] Solution the component. ${solution}"
-        // dsl.echo "[INFO] [gradle] Name the component. ${name}"
-        // dsl.echo "[INFO] [gradle] Module the component. ${module}"
-        // dsl.echo "[INFO] [gradle] Pipe the component. ${pipe}"
-        // dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
-
-        //validar la version y el agente de jdk  y docker
-    }
-
-    @Override
-    void registry(Object dsl) {
+        console("[INFO] [gradle] Version the component. ${version}", dsl)
+        console("[INFO] [gradle] Group the component. ${group}", dsl)
+        console("[INFO] [gradle] Type the component. ${type}", dsl)
+        console("[INFO] [gradle] Solution the component. ${solution}", dsl)
+        console("[INFO] [gradle] Name the component. ${name}", dsl)
+        console("[INFO] [gradle] Module the component. ${module}", dsl)
+        console("[INFO] [gradle] Pipe the component. ${pipe}", dsl)
+        console("[INFO] [gradle] Successfully complete the construction of the component.", dsl)
 
     }
-
 }
