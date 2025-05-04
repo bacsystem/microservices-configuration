@@ -99,9 +99,8 @@ abstract class BuildFactory {
                 } else if (branch == "uat") {
                     env.ENVIRONMENT = "uat"
                 } else if (branch.startsWith("release/")) {
-                    env.ENVIRONMENT = "test"
+                    env.ENVIRONMENT = "prod"
                 }
-
                 dsl.echo "ENVIRONMENT: ${env.ENVIRONMENT}"
                 break
             default:
@@ -109,12 +108,29 @@ abstract class BuildFactory {
         }
     }
 
-    static void deploy(def dsl) {
+    static void deploy(def application, def environment, def image, def dsl) {
+        dsl.env.APP_NAME = application
+        dsl.env.DISPLAY_NAME = "${environment}-${application}-${dsl.env.BUILD_NUMBER}"
+        if (!image) {
+            dsl.env.IMAGE = image
+            dsl.env.REGISTRY_IMAGE = "${dsl.REGISTRY_URL}/${dsl.env.IMAGE}"
+        } else {
+            dsl.env.IMAGE = "default"
+            dsl.env.REGISTRY_IMAGE = "default"
+        }
+
+        dsl.echo("APP_NAME: ${dsl.env.APP_NAME}")
+        dsl.echo("DISPLAY_NAME: ${dsl.env.DISPLAY_NAME}")
+        dsl.echo("IMAGE: ${dsl.env.IMAGE}")
+        dsl.echo("REGISTRY_IMAGE: ${dsl.env.REGISTRY_IMAGE}")
 
     }
 
-    static void undeploy(def dsl) {
-
+    static void undeploy(def application, def environment, def dsl) {
+        dsl.env.APP_NAME = application
+        dsl.echo("APP_NAME: ${dsl.env.APP_NAME}")
+        dsl.env.DISPLAY_NAME = "${environment}-${application}-${dsl.env.BUILD_NUMBER}"
+        dsl.echo("DISPLAY_NAME: ${dsl.env.DISPLAY_NAME}")
     }
 
 
