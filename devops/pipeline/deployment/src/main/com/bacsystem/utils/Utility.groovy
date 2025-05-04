@@ -31,14 +31,13 @@ import main.com.bacsystem.enums.PipelineProcess
 class Utility {
 
     static String repository(def dsl) {
-        console("[INFO] SCM object: ${dsl.scm}", dsl)
         if (dsl.scm == null || !dsl.scm.getUserRemoteConfigs()) {
             error "[ERROR] The object SCM is invalid o is empty 'userRemoteConfigs'"
         }
         // Extract the URL from the first remote config
         def repoUrl = dsl.scm.getUserRemoteConfigs()[0]?.getUrl()
         if (!repoUrl) {
-            error "[ERROR] No se encontró la URL del repositorio en la configuración SCM"
+            error "[ERROR] Not found URL of repository in the configuration SCM"
         }
         // Tokenize and extract repository name
         def repoName = repoUrl.tokenize('/').last().split("\\.")[0]
@@ -95,7 +94,6 @@ class Utility {
         }
 
         String repoName = repository(dsl)
-        console("[INFO] Detected repository name: ${repoName}", dsl)
 
         // Read the YAML file
         if (!exist(configFilePath, dsl)) {
@@ -118,7 +116,6 @@ class Utility {
 
         def solution = appData.group ?: 'default-group'
 
-        console("[INFO] Parameters obtained: agent='${agent}', solution='${solution}'", dsl)
         return [agent, solution]
     }
 

@@ -3,8 +3,6 @@ import main.com.bacsystem.stages.Staging
 import static main.com.bacsystem.utils.Utility.flowType
 
 def call(Map params = [:]) {
-    echo "process ${params}"
-    echo "process ${params.process}"
 
     def staging = new Staging(params.dsl)
 
@@ -33,19 +31,22 @@ def call(Map params = [:]) {
                 }
                 steps {
                     script {
-                        // Call getParameters to get agent and solution project
+                        echo "[INFO] Searching parameters in config deploy file."
+
                         (agentLabel, solutionProject) = staging.getParameters()
                         // Set fallback values if null
                         if (agentLabel == null) {
                             agentLabel = "principal"
                         }
-                        echo "[INFO] Using agent: ${agentLabel} and solution project: ${solutionProject}"
+                        echo "[INFO] Found parameter -> { agent: [${agentLabel}] and solution project: [${solutionProject}] }"
 
                         // Directory listing (for debugging)
                         sh "ls -la"
 
                         //obtains flow type
+                        echo "[INFO] Work with flow type [${params.process}]"
                         String flowType = flowType("${params.process}")
+
                         if (flowType == null) {
                             echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
                         } else {

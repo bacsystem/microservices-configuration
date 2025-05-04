@@ -8,5 +8,4 @@ def params = [
                         smc     : true,
                         opt     : false
                     ]
-echo "[INFO] Init process Jenkins file with ${params}"
 process(params)
