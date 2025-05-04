@@ -99,13 +99,13 @@ class Configuration extends PipelineBase {
             set -a
             source ${configName}
             set +a
-            ${this._dsl.env}
+            env
             """, returnStdout: true).split("\n")
 
         envVars.each {
             if (it.contains("=")) {
                 def (key, value) = it.tokenize("=")
-                env[key] = value
+                this._dsl.env[key] = value
             }
         }
 
