@@ -50,7 +50,6 @@ class Utility {
     }
 
     static def findCompiler(def dsl) {
-        console("[INFO] Detecting build tool based on repository files...", dsl)
         def tools = [
                 'pom.xml'     : 'maven',
                 'build.gradle': 'gradle',
@@ -60,7 +59,7 @@ class Utility {
         ]
         def detected = null
         tools.each { key, value ->
-            if (existObject(key, dsl)) {
+            if (exist(key, dsl)) {
                 console("[INFO] Build tool detected: ${value}", dsl)
                 detected = value
                 return
