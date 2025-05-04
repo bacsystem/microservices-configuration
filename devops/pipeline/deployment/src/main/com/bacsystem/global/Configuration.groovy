@@ -99,7 +99,7 @@ class Configuration extends PipelineBase {
             set -a
             source ${configName}
             set +a
-            env
+            ${this._dsl.env}
             """, returnStdout: true).split("\n")
 
         envVars.each {
