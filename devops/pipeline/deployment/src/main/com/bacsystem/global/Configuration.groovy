@@ -94,12 +94,14 @@ class Configuration extends PipelineBase {
     void execute() {
         writeToFile(configName, getResourceContent())
         this._dsl.sh "cat ./${configName}"
+        /*
         this._dsl.sh """
             set -a
             . ./${configName}
             set +a
         """
-        // this._dsl.load("./$configName")
+         */
+        this._dsl.load("./$configName")
         this._dsl.echo "configTest=${this._dsl.env.TEST_CONFIG}"
     }
 
