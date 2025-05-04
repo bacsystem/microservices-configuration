@@ -46,4 +46,5 @@ class ProcessPrepare extends PipelineBase {
         BuildFactory.gitflow(this._dsl, process)
         BuildFactory.image(this._dsl, process)
     }
+
 }

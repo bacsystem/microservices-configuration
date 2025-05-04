@@ -1,8 +1,8 @@
 package main.flow.stages
 
 import main.flow.base.PipelineBase
-import main.flow.global.Configuration
 import main.flow.pipeline.ProcessPrepare
+import main.flow.pipeline.ProcessTest
 import main.flow.utils.Utility
 
 /**
@@ -28,11 +28,13 @@ class Staging extends PipelineBase {
     static final long serialVersionUID = 1
 
     private ProcessPrepare processPrepare
+    private ProcessTest processTest
 
     Staging(def dsl) {
         super(dsl)
         dsl.echo "[INFO] load stage process"
         this.processPrepare = new ProcessPrepare(dsl)
+        this.processTest = new ProcessTest(dsl)
     }
 
     def deployParams() {
@@ -115,7 +117,12 @@ class Staging extends PipelineBase {
         Console("[INFO] Construcción completada para ${solution} utilizando ${compiler}")
     }
 
-    def test() {}
+    def test(Map param = [:]) {
+        Console("[INFO] Init test process: env ${this._dsl.env.BRANCH_NAME}")
+        Console("[INFO] Init test process: env ${this._dsl.BRANCH_NAME}")
+        Console("[INFO] Init test process: env ${param}")
+        //this.processTest.init(param., "solution")
+    }
 
     def image() {}
 
