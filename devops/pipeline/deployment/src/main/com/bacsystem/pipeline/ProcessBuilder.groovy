@@ -1,7 +1,7 @@
-package main.flow.pipeline
+package main.com.bacsystem.pipeline
 
-import main.flow.base.PipelineBase
-import main.flow.global.Configuration
+import main.com.bacsystem.base.PipelineBase
+import main.com.bacsystem.global.Configuration
 
 /**
  * <b>Builder</b>

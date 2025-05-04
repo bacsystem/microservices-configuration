@@ -1,4 +1,5 @@
-import main.flow.stages.Staging
+import main.com.bacsystem.stages.Staging
+import main.com.bacsystem.utils.Utility
 
 def call(Map params = [:]) {
     echo "process ${params}"
@@ -31,8 +32,8 @@ def call(Map params = [:]) {
                 }
                 steps {
                     script {
-                        // Call deployParams to get agent and solution project
-                        (agentLabel, solutionProject) = staging.deployParams()
+                        // Call getParameters to get agent and solution project
+                        (agentLabel, solutionProject) = staging.getParameters()
 
                         // Set fallback values if null
                         if (agentLabel == null) {
@@ -44,15 +45,20 @@ def call(Map params = [:]) {
                         // Directory listing (for debugging)
                         sh "ls -la"
 
+                        //obtains flow type
+                        String flowType = Utility.flowType("${params.process}")
+                        echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
+/*
                         String compiler = staging.getCompiler()
 
                         if (compiler != null) {
                             echo "[INFO] Detected build tool: ${compiler}"
-                            //utils.executeBuildTools(buildTool)
-                            staging.getBuild("${params.value}", solutionProject, compiler)
+                            staging.getSetting("${params.value}", solutionProject, compiler)
                         } else {
                             echo "No recognized build tool found. Skipping build process."
                         }
+
+ */
 
                     }
                 }
@@ -61,9 +67,10 @@ def call(Map params = [:]) {
             stage('Unit Test') {
                 steps {
                     script {
+
                         echo "Unit Branch... ${BRANCH_NAME}"
                         echo "Unit Test... ${ENVIRONMENT}"
-                        staging.test(params)
+                        // staging.test(params)
                     }
 
 

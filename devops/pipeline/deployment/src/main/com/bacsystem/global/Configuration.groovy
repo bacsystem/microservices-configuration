@@ -1,7 +1,7 @@
-package main.flow.global
+package main.com.bacsystem.global
 
-import groovy.transform.PackageScope
-import main.flow.base.PipelineBase
+
+import main.com.bacsystem.base.PipelineBase
 
 /**
  * <b>Configuration</b>

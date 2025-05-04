@@ -1,6 +1,6 @@
-package main.flow.base
+package main.com.bacsystem.base
 
-import main.flow.constants.IConstants
+import main.com.bacsystem.constants.IConstants
 
 class PipelineBase implements IConstants {
 
