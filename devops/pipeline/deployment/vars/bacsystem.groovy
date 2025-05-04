@@ -63,7 +63,7 @@ def call(Map params = [:]) {
                     }
                 }
             }
-
+/*
             stage('Unit Test') {
                 steps {
                     script {
@@ -77,55 +77,80 @@ def call(Map params = [:]) {
                 }
             }
 
+ */
+/*
             stage('Dependencies, Code Scan & Bugs') {
                 steps {
                     echo 'Dependencies, Code Scan & Bugs...'
                 }
             }
 
+ */
+/*
             stage('SonarQube Quality Gate') {
                 steps {
                     echo 'SonarQube Quality Gate...'
                 }
             }
 
+ */
+/*
             stage('Build Image') {
                 steps {
                     echo 'Build Image...'
                 }
             }
 
+ */
+/*
             stage('deploy to Dev') {
                 steps {
                     echo 'deploy to Dev...'
                 }
             }
 
+ */
+/*
             stage('deploy to Test') {
                 steps {
                     echo 'deploy to Test...'
                 }
             }
+
+ */
+            /*
             stage('deploy to UAT') {
                 steps {
                     echo 'deploy to UAT...'
                 }
             }
+
+             */
+            /*
             stage('deploy to Prod') {
                 steps {
                     echo 'deploy to Prod...'
                 }
             }
+
+             */
+            /*
             stage('Release') {
                 steps {
                     echo 'Release...'
                 }
             }
+
+             */
+
+            /*
             stage('Archive Build') {
                 steps {
                     echo 'Archive Build...'
                 }
             }
+
+             */
         }
 
         post {

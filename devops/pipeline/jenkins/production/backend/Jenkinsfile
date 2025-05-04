@@ -2,7 +2,7 @@
 @Library('bacsystem-shared-lib') _
 
 def params = [
-                        value   : "v1",
+                        value   : "Gitflow",
                         dsl     : this,
                         wout    : true,
                         smc     : true,
