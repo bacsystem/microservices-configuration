@@ -17,11 +17,13 @@ package main.com.bacsystem.enums
 
 
 enum Compiler {
+
     MAVEN("pom.xml", "maven", "mvn clean install"),
     GOLANG("go.mod", "golang", "go build"),
     NPM("package.json", "npm", "npm install && npm run build"),
     PYTHON("setup.py", "python", "python setup.py install"),
     GRADLE("build.gradle", "gradle", "./gradlew build");
+
     private String _file
     private String _mgn
     private String _cmd

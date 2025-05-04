@@ -26,11 +26,11 @@ class FlowFactory {
 
     static IFlowFactory getFlowFactory(String process) {
         switch (process) {
-            case WorkFlow.GIT_FLOW.value():
+            case WorkFlow.GIT_FLOW.getValue():
                 return new GitFlow()
-            case WorkFlow.GITHUB_FLOW.value():
+            case WorkFlow.GITHUB_FLOW.getValue():
                 return new GithubFlow()
-            case WorkFlow.GITLAB_FLOW.value():
+            case WorkFlow.GITLAB_FLOW.getValue():
                 return new GitlabFlow()
             default:
                 error "[ERROR] Not process get flow factory"
