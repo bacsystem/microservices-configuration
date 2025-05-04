@@ -118,6 +118,7 @@ class Configuration extends PipelineBase {
          */
         //this._dsl.load("./$configName")
         this._dsl.echo "configTest=${this._dsl.TEST_CONFIG}"
+        this._dsl.echo "configTest=${this._dsl.env.TEST_CONFIG}"
     }
 
     // ========== Private Methods ==========
