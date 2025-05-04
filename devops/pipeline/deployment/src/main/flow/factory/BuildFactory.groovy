@@ -39,13 +39,13 @@ abstract class BuildFactory {
         dsl.env.PREFIX_DISPLAY = ".B${dsl.env.COMMITID}"
         dsl.env.DISPLAY = ".B${dsl.env.COMMITID}"
 
-        dsl.echo "${dsl.env.REPOSITORY_EMAIL}"
-        dsl.echo "${dsl.env.LAST_COMMIT}"
-        dsl.echo "${dsl.env.BUILD_GIT_NR}"
-        dsl.echo "${dsl.env.COMMITID}"
-        dsl.echo "${dsl.env.PREFIX}"
-        dsl.echo "${dsl.env.PREFIX_DISPLAY}"
-        dsl.echo "${dsl.env.DISPLAY}"
+        dsl.echo "REPOSITORY_EMAIL: ${dsl.env.REPOSITORY_EMAIL}"
+        dsl.echo "LAST_COMMIT: ${dsl.env.LAST_COMMIT}"
+        dsl.echo "BUILD_GIT_NR: ${dsl.env.BUILD_GIT_NR}"
+        dsl.echo "COMMITID: ${dsl.env.COMMITID}"
+        dsl.echo "PREFIX: ${dsl.env.PREFIX}"
+        dsl.echo "PREFIX_DISPLAY: ${dsl.env.PREFIX_DISPLAY}"
+        dsl.echo "DISPLAY: ${dsl.env.DISPLAY}"
     }
 
     static void gitflow(def dsl, String process) {
