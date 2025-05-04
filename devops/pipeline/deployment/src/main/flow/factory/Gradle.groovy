@@ -36,7 +36,7 @@ class Gradle extends BuildFactory {
         // Prepare gradlew
         def propertyFile = 'properties.tmp'
         dsl.sh "chmod +x ./gradlew"
-        dsl.sh "./gradlew -q properties"
+        //dsl.sh "./gradlew -q properties"
         dsl.sh "./gradlew -q properties > ${propertyFile}"
 
         def readProperties = { file, property ->

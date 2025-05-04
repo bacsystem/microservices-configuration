@@ -30,7 +30,8 @@ class ProcessPrepare extends PipelineBase {
 
     ProcessPrepare(def dsl) {
         super(dsl)
-        dsl.echo "[INFO] load prepare stage process"
+        dsl.echo "[INFO] load prepare process"
+        this.configuration = new Configuration(dsl)
     }
 
     def init(String process, String solution, String compiler) {
