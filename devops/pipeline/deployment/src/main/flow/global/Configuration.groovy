@@ -40,6 +40,7 @@ class Configuration extends PipelineBase {
      * @return this for method chaining
      */
     Configuration withConfig(String configName) {
+        Console("[INFO] File environment configuration: ${configName}")
         this.configName = configName
         return this
     }
@@ -92,7 +93,7 @@ class Configuration extends PipelineBase {
         writeToFile(configName, getResourceContent())
         this._dsl.sh "cat ./${configName}"
         this._dsl.build("./$configName")
-        this._dsl.println("configTest=${dsl.TEST_CONFIG}")
+        this._dsl.println("configTest=${this._dsl.TEST_CONFIG}")
     }
 
     // ========== Private Methods ==========
