@@ -25,7 +25,7 @@ class Maven extends BuildFactory {
     }
 
     @Override
-    void deploy(Object dsl) {
+    void registry(Object dsl) {
 
     }
 }

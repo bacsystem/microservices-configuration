@@ -21,11 +21,11 @@ class Golang extends BuildFactory {
 
     @Override
     void build(def dsl) {
-        dsl.COMPILER
+
     }
 
     @Override
-    void deploy(Object dsl) {
+    void registry(Object dsl) {
 
     }
 }
