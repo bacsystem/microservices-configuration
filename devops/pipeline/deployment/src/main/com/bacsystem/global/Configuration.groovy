@@ -94,6 +94,21 @@ class Configuration extends PipelineBase {
     void execute() {
         writeToFile(configName, getResourceContent())
         this._dsl.sh "cat ./${configName}"
+
+        def envVars = this._dsl.sh(script: """#!/bin/bash
+            set -a
+            source ${configName}
+            set +a
+            env
+            """, returnStdout: true).split("\n")
+
+        envVars.each {
+            if (it.contains("=")) {
+                def (key, value) = it.tokenize("=")
+                env[key] = value
+            }
+        }
+
         /*
         this._dsl.sh """
             set -a
@@ -101,8 +116,8 @@ class Configuration extends PipelineBase {
             set +a
         """
          */
-        this._dsl.load("./$configName")
-        this._dsl.echo "configTest=${this._dsl.env.TEST_CONFIG}"
+        //this._dsl.load("./$configName")
+        this._dsl.echo "configTest=${this._dsl.TEST_CONFIG}"
     }
 
     // ========== Private Methods ==========
