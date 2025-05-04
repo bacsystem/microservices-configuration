@@ -65,6 +65,6 @@ enum Compiler {
                 .collect(Collectors.toList())
 
          */
-        return values().collect { it.files() }
+        return values().collect { it._value }
     }
 }

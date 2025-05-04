@@ -62,6 +62,7 @@ class Utility {
             console("[WARN] No recognized build tool found in repository.", dsl)
         }
 
+        console("[INFO] Compiler was found to execute the process", dsl)
         return detected
     }
 
