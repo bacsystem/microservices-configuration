@@ -45,7 +45,7 @@ class Staging extends PipelineBase {
             def flow = workflow("${param.workflow}")
             this.processPrepare.init(flow, solution)
         } catch (err) {
-            error "[ERROR] Process failed with error [${err}]"
+            this._dsl.error "[ERROR] Process failed with error [${err}]"
         } finally {
             console("[INFO] Setting load successfully for jenkins flow", this._dsl)
         }
