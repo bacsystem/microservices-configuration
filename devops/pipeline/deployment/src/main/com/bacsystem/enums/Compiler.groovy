@@ -37,7 +37,7 @@ enum Compiler {
     static {
         MAP = new HashMap<>()
         for (Compiler c : values()) {
-            MAP.put(c.value(), c)
+            MAP.put(c._mgn, c)
         }
     }
 
