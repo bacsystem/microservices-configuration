@@ -20,7 +20,7 @@ import main.com.bacsystem.utils.Utility
 
 
 enum PipelineProcess {
-    PROCESS("Gitflow")
+    PROCESS("Gitflow");
     private String value
 
     PipelineProcess(String value) {
@@ -34,6 +34,6 @@ enum PipelineProcess {
     static String get(String val) {
         def v = values()
                 .find { it.name() == val }
-        return v.value()
+        return v?.value()
     }
 }

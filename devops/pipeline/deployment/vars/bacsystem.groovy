@@ -46,7 +46,11 @@ def call(Map params = [:]) {
 
                         //obtains flow type
                         String flowType = flowType("${params.process}")
-                        echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
+                        if (flowType == null) {
+                            echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
+                        } else {
+                            echo "[WARN] Not found flow type: ${flowType} and solution project: ${solutionProject}"
+                        }
 /*
                         String compiler = staging.getCompiler()
 

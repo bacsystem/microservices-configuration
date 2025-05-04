@@ -29,14 +29,14 @@ class ProcessPrepare extends PipelineBase {
     static final long serialVersionUID = 1
 
     private static final String STATIC_CONFIG = "static_environment.env"
-    private Configuration configuration
+    //private Configuration configuration
 
     ProcessPrepare(def dsl) {
         super(dsl)
         console("[INFO] load prepare process", dsl)
-        this.configuration = new Configuration(dsl)
+       // this.configuration = new Configuration(dsl)
     }
-
+/*
     def init(String process, String solution, String compiler) {
         this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
         this.configuration.withConfig(STATIC_CONFIG).execute()
@@ -48,4 +48,6 @@ class ProcessPrepare extends PipelineBase {
         BuildFactory.gitflow(this._dsl, process)
         BuildFactory.image(this._dsl, process)
     }
+
+ */
 }

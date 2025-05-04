@@ -2,8 +2,8 @@ package main.com.bacsystem.stages
 
 import main.com.bacsystem.base.PipelineBase
 
-import static main.com.bacsystem.utils.Utility.console
-import static main.com.bacsystem.utils.Utility.params
+import static main.com.bacsystem.utils.Utility.findCompiler
+import static main.com.bacsystem.utils.Utility.findParams
 
 /**
  * <b>Staging</b>
@@ -32,17 +32,18 @@ class Staging extends PipelineBase {
 
     Staging(def dsl) {
         super(dsl)
+        dsl.echo "[INFO] Load stage process"
         //console("[INFO] load stage process", dsl)
         // this.processPrepare = new ProcessPrepare(dsl)
         //this.processTest = new ProcessTest(dsl)
     }
 
     def getParameters() {
-        return params(this._dsl)
+        return findParams(this._dsl)
     }
 
     def getCompiler() {
-        return compiler(this._dsl)
+        return findCompiler(this._dsl)
     }
 /*
     def getSetting(String process = "", String solution = "", String compiler) {

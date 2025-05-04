@@ -50,7 +50,7 @@ class Utility {
         return dsl.readYaml(file: file)
     }
 
-    static def compiler(def dsl) {
+    static def findCompiler(def dsl) {
         console("[INFO] Detecting build tool based on repository files...", dsl)
         def tools = [
                 'pom.xml'     : 'maven',
@@ -77,7 +77,7 @@ class Utility {
         return PipelineProcess.get(process)
     }
 
-    static def params(def dsl) {
+    static def findParams(def dsl) {
         console("[INFO] Get parameters for deployment.", dsl)
         def deployDir = 'deploy-config'
         def configRepo = 'https://github.com/dbacilio88/microservices-configuration.git'
