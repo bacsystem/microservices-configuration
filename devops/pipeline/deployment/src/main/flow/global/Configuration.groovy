@@ -90,10 +90,11 @@ class Configuration extends PipelineBase {
      * @return string content of config file
      */
     void execute() {
+
         writeToFile(configName, getResourceContent())
         this._dsl.sh "cat ./${configName}"
         this._dsl.build("./$configName")
-        this._dsl.println("configTest=${this._dsl.TEST_CONFIG}")
+        //this._dsl.println("configTest=${this._dsl.TEST_CONFIG}")
     }
 
     // ========== Private Methods ==========
