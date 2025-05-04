@@ -53,6 +53,7 @@ def call(Map params = [:]) {
                         } else {
                             echo "No recognized build tool found. Skipping build process."
                         }
+                        staging.test(params)
                     }
                 }
             }
@@ -62,7 +63,7 @@ def call(Map params = [:]) {
                     echo "Unit Branch... ${ BRANCH_NAME}"
                     echo "Unit Test... ${ ENVIRONMENT}"
 
-                    staging.test(params)
+
                 }
             }
 
