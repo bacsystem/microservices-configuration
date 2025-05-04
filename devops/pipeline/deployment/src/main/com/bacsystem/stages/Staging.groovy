@@ -1,7 +1,9 @@
 package main.com.bacsystem.stages
 
 import main.com.bacsystem.base.PipelineBase
+import main.com.bacsystem.pipeline.ProcessPrepare
 
+import static main.com.bacsystem.utils.Utility.console
 import static main.com.bacsystem.utils.Utility.findCompiler
 import static main.com.bacsystem.utils.Utility.findParams
 
@@ -27,19 +29,28 @@ class Staging extends PipelineBase {
     @Serial
     static final long serialVersionUID = 1
 
-    //private ProcessPrepare processPrepare
+    private ProcessPrepare processPrepare
     //private ProcessTest processTest
 
     Staging(def dsl) {
         super(dsl)
         dsl.echo "[INFO] Load stage process"
-        //console("[INFO] load stage process", dsl)
-        // this.processPrepare = new ProcessPrepare(dsl)
+        this.processPrepare = new ProcessPrepare(dsl)
         //this.processTest = new ProcessTest(dsl)
     }
 
     def getParameters() {
         return findParams(this._dsl)
+    }
+
+    void getFlow(String flowType) {
+        console("[INFO] Working with jenkins flow -> [${flowType}]", this._dsl)
+        if (!flowType) {
+
+            echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
+        } else {
+            echo "[WARN] Not found flow type: ${flowType} and solution project: ${solutionProject}"
+        }
     }
 
     def getCompiler() {

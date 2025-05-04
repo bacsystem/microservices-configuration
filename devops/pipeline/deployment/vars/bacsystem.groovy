@@ -31,32 +31,30 @@ def call(Map params = [:]) {
                 }
                 steps {
                     script {
+
                         echo "[INFO] Searching parameters in config deploy file."
 
                         (agentLabel, solutionProject) = staging.getParameters()
-                        // Set fallback values if null
+
                         if (agentLabel == null) {
                             agentLabel = "principal"
                         }
+
                         echo "[INFO] Found parameter -> { agent: [${agentLabel}] and solution project: [${solutionProject}] }"
 
-                        // Directory listing (for debugging)
                         sh "ls -la"
 
-                        //obtains flow type
-                        echo "[INFO] Work with flow type [${params.process}]"
+                        echo "[INFO] Lookup jenkins workflow type -> [${params.process}]"
+
                         String flowType = flowType("${params.process}")
 
-                        if (flowType == null) {
-                            echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
-                        } else {
-                            echo "[WARN] Not found flow type: ${flowType} and solution project: ${solutionProject}"
-                        }
-/*
+                        echo "[INFO] Find the type of compiler to work with jenkins"
                         String compiler = staging.getCompiler()
+                        echo "[INFO] Detected build tool: ${compiler}"
+                        staging.getFlow(flowType)
+/*
 
                         if (compiler != null) {
-                            echo "[INFO] Detected build tool: ${compiler}"
                             staging.getSetting("${params.value}", solutionProject, compiler)
                         } else {
                             echo "No recognized build tool found. Skipping build process."
