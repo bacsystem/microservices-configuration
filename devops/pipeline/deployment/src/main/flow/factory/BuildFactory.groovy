@@ -106,6 +106,7 @@ abstract class BuildFactory {
             default:
                 dsl.echo("Branching process '${process}' is not configured")
         }
+        dsl.env = env
     }
 
     static void deploy(def application, def environment, def image, def dsl) {
