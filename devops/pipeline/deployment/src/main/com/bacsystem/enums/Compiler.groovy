@@ -1,8 +1,4 @@
 package main.com.bacsystem.enums
-
-
-import java.util.stream.Collectors
-
 /**
  * <b>Compiler</b>
  * <p>
@@ -21,17 +17,21 @@ import java.util.stream.Collectors
 
 
 enum Compiler {
-    MAVEN("pom.xml"),
-    GOLANG("go.mod"),
-    NPM("package.json"),
-    PYTHON("setup.py"),
-    GRADLE("build.gradle");
-    private String _value
+    MAVEN("pom.xml", "maven", "mvn clean install"),
+    GOLANG("go.mod", "golang", "go build"),
+    NPM("package.json", "npm", "npm install && npm run build"),
+    PYTHON("setup.py", "python", "python setup.py install"),
+    GRADLE("build.gradle", "gradle", "./gradlew build");
+    private String _file
+    private String _mgn
+    private String _cmd
 
     private static final Map<String, Compiler> MAP
 
-    Compiler(String file) {
-        this._value = file
+    Compiler(String file, String mgn, String cmd) {
+        this._file = file
+        this._mgn = mgn
+        this._cmd = cmd
     }
 
     static {
@@ -41,16 +41,12 @@ enum Compiler {
         }
     }
 
-    String value() {
-        return this._value
-    }
-
-    String files() {
-        return this._value
+    String getFile() {
+        return this._file
     }
 
     static String get(String val) {
-        def v = values().find { it._value == val }
+        def v = values().find { it._mgn == val }
         return v?.value()
     }
 
@@ -65,6 +61,6 @@ enum Compiler {
                 .collect(Collectors.toList())
 
          */
-        return values().collect { it._value }
+        return values().collect { it.getFile() }
     }
 }
