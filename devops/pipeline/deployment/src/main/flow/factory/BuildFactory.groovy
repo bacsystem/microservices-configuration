@@ -75,6 +75,9 @@ abstract class BuildFactory {
                 }
 
                 dsl.env.DISPLAY = ""
+
+                dsl.echo "PREFIX: ${dsl.env.PREFIX}"
+                dsl.echo "DISPLAY: ${dsl.env.DISPLAY}"
                 break
             default:
                 dsl.echo("Gitflow process '${process}' is not configured")
@@ -94,6 +97,8 @@ abstract class BuildFactory {
                 } else if (branch.startsWith("release/")) {
                     env.ENVIRONMENT = "test"
                 }
+
+                dsl.echo "ENVIRONMENT: ${env.ENVIRONMENT}"
                 break
             default:
                 dsl.echo("Branching process '${process}' is not configured")
