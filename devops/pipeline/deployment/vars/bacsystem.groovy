@@ -1,5 +1,6 @@
 import main.com.bacsystem.stages.Staging
-import main.com.bacsystem.utils.Utility
+
+import static main.com.bacsystem.utils.Utility.flowType
 
 def call(Map params = [:]) {
     echo "process ${params}"
@@ -44,7 +45,7 @@ def call(Map params = [:]) {
                         sh "ls -la"
 
                         //obtains flow type
-                        String flowType = Utility.flowType("${params.process}")
+                        String flowType = flowType("${params.process}")
                         echo "[INFO] Using flow type: ${flowType} and solution project: ${solutionProject}"
 /*
                         String compiler = staging.getCompiler()

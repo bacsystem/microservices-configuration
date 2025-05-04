@@ -1,8 +1,8 @@
-import main.com.bacsystem.constants.IConstants
+import main.com.bacsystem.enums.PipelineProcess
 
 
 def call(Map params = [:]) {
-    if (IConstants.PipelineProcess.PROCESS.value() == params.process) {
+    if (PipelineProcess.PROCESS.value() == params.process) {
         echo "[INFO] Init process pipeline jenkins."
         bacsystem(params)
     } else {

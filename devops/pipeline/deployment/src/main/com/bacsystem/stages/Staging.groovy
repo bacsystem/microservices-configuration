@@ -3,6 +3,7 @@ package main.com.bacsystem.stages
 import main.com.bacsystem.base.PipelineBase
 
 import static main.com.bacsystem.utils.Utility.console
+import static main.com.bacsystem.utils.Utility.params
 
 /**
  * <b>Staging</b>
@@ -37,11 +38,11 @@ class Staging extends PipelineBase {
     }
 
     def getParameters() {
-        return Utility.params(this._dsl)
+        return params(this._dsl)
     }
 
     def getCompiler() {
-        return Utility.compiler(this._dsl)
+        return compiler(this._dsl)
     }
 
     def getSetting(String process = "", String solution = "", String compiler) {

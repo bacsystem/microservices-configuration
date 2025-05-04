@@ -1,6 +1,7 @@
 package main.com.bacsystem.factory
 
 import main.com.bacsystem.constants.IConstants
+import main.com.bacsystem.enums.PipelineProcess
 
 /**
  * <b>LoadFactory</b>
@@ -53,7 +54,7 @@ abstract class BuildFactory {
         def branchName = dsl.env.BRANCH_NAME
 
         switch (process) {
-            case IConstants.PipelineProcess.PROCESS.value():
+            case PipelineProcess.PROCESS.value():
                 if (branchName.startsWith("fix")) {
                     dsl.env.PREFIX = "-fix" + "${dsl.env.PREFIX}"
                 }
