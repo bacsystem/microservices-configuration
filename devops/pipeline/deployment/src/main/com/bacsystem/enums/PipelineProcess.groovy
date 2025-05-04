@@ -1,7 +1,4 @@
 package main.com.bacsystem.enums
-
-import main.com.bacsystem.utils.Utility
-
 /**
  * <b>PipelineProcess</b>
  * <p>
@@ -33,7 +30,7 @@ enum PipelineProcess {
 
     static String get(String val) {
         def v = values()
-                .find { it.name() == val }
+                .find { it.value == val }
         return v?.value()
     }
 }

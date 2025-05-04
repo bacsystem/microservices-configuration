@@ -77,7 +77,6 @@ class Utility {
     }
 
     static def findParams(def dsl) {
-        console("[INFO] Get parameters for deployment.", dsl)
         def deployDir = 'deploy-config'
         def configRepo = 'https://github.com/dbacilio88/microservices-configuration.git'
         def credentialsId = 'github-jenkins-ssh'
