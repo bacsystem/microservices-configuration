@@ -55,12 +55,6 @@ enum Compiler {
     }
 
     static List<String> compilers() {
-        /*
-        return Arrays.asList(values()).stream()
-                .map { it.files() }
-                .collect(Collectors.toList())
-
-         */
-        return values().collect { it.getFile() }
+        return values().collect { it?.getFile() }
     }
 }

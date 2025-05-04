@@ -21,19 +21,19 @@ enum WorkFlow {
     GITHUB_FLOW("GithubFlow"),
     GITLAB_FLOW("GitlabFlow");
 
-    private String value
+    private String _value
 
     WorkFlow(String value) {
-        this.value = value
+        this._value = value
     }
 
-    String value() {
-        return this.value
+    String getValue() {
+        return this._value
     }
 
     static String get(String val) {
         def v = values()
-                .find { it.value == val }
-        return v?.value()
+                .find { it._value == val }
+        return v?.getValue()
     }
 }

@@ -25,20 +25,20 @@ enum PullRequestStatus {
     FAILURE("failure"),
     ERROR("error"),
 
-    private String value
+    private String _value
 
     PullRequestStatus(String value) {
-        this.value = value
+        this._value = value
     }
 
-    String value() {
-        return this.value
+    String getValue() {
+        return this._value
     }
 
     static String get(String val) {
         def v = values()
-                .find { it.name() == val }
-        return v.value()
+                .find { it._value == val }
+        return v?.getValue()
     }
 
 }
