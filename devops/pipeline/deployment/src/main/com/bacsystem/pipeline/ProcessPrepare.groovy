@@ -36,7 +36,7 @@ class ProcessPrepare extends PipelineBase {
     }
 
     def init(String process, String solution) {
-        console("[INFO] Starting jenkins preparation process")
+        console("[INFO] Starting jenkins preparation process", this._dsl)
         // this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
         // this.configuration.withConfig(STATIC_CONFIG).execute()
         String compiler = findCompiler(this._dsl)

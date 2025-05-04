@@ -42,7 +42,6 @@ def call(Map params = [:]) {
 
                         sh "ls -la"
 
-                        echo "[INFO] Lookup jenkins workflow type -> [${params.workflow}]"
                         staging.settings(params, solutionProject)
 
                         //echo "[INFO] Find the type of compiler to work with jenkins"
