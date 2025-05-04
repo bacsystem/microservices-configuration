@@ -1,5 +1,6 @@
 package main.com.bacsystem.factory.compiler
 
+import main.com.bacsystem.enums.Compiler
 import main.com.bacsystem.factory.compiler.pkg.Gradle
 import main.com.bacsystem.factory.compiler.pkg.Maven
 
@@ -24,12 +25,12 @@ class CompilerFactory {
 
     static ICompilerFactory getCompiler(String type) {
         switch (type.toLowerCase()) {
-            case "gradle":
+            case Compiler.GRADLE.GetMgn():
                 return new Gradle()
-            case "maven":
+            case Compiler.MAVEN.GetMgn():
                 return new Maven()
             default:
-                error ""
+                error "[ERROR] Not compiler factory"
         }
     }
 }
