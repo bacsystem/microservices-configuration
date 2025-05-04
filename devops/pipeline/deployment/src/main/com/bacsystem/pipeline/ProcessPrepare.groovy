@@ -47,7 +47,7 @@ class ProcessPrepare extends PipelineBase {
         //BuildFactory.commit(this._dsl)
         // BuildFactory.gitflow(this._dsl, process)
         // BuildFactory.image(this._dsl, process)
-        console("[INFO] Process started to run jenkins")
+        console("[INFO] Process started to run jenkins", this._dsl)
     }
 
 }

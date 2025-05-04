@@ -36,13 +36,13 @@ class Staging extends PipelineBase {
     }
 
     def parameters() {
-        return findParams(dsl: this._dsl)
+        return findParams(this._dsl)
     }
 
     def settings(Map param = [:], String solution = "") {
-        echo "[INFO] Lookup jenkins workflow type -> [${param.workflow}]"
+        console("[INFO] Lookup jenkins workflow type -> [${param.workflow}] ", this._dsl)
         try {
-            def flow = workflow(wf: "${param.workflow}")
+            def flow = workflow("${param.workflow}")
             this.processPrepare.init(flow, solution)
         } catch (err) {
             error "[ERROR] Process failed with error [${err}]"
