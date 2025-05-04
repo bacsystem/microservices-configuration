@@ -1,5 +1,7 @@
 package main.flow.factory
 
+import main.flow.utils.Utility
+
 /**
  * <b>Gradle</b>
  * <p>
@@ -22,6 +24,7 @@ class Gradle extends BuildFactory {
     @Override
     void build(def dsl) {
         dsl.COMPILER = "gradle"
+        dsl.IS_MAVEN_COMPILER = false
         if (!dsl.fileExists("./gradle/wrapper/gradle-wrapper.jar")) {
             dsl.sh "gradle wrapper"
         }
@@ -30,8 +33,17 @@ class Gradle extends BuildFactory {
         dsl.sh "chmod +x ./gradlew"
         dsl.sh "./gradlew -q properties > ${propertyFile}"
         String version = readProperties(propertyFile, "version", dsl)
+        String group = readProperties(propertyFile, "version", dsl)
+        String type = readProperties(propertyFile, "type", dsl)
+        String solution = readProperties(propertyFile, "solution", dsl) ? readProperties(propertyFile, "solution", dsl) : readProperties(propertyFile, "app.solution", dsl)
+        String name = Utility.repository(dsl.scm)
 
-        dsl.echo "[INFO] [gradle] Successfully complete the construction of the component. ${version}"
+        dsl.echo "[INFO] [gradle] Version the component. ${version}"
+        dsl.echo "[INFO] [gradle] Group the component. ${group}"
+        dsl.echo "[INFO] [gradle] Type the component. ${type}"
+        dsl.echo "[INFO] [gradle] Solution the component. ${solution}"
+        dsl.echo "[INFO] [gradle] Name the component. ${name}"
+        dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
     }
 
     static String readProperties(String file, String property, def dsl) {
