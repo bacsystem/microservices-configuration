@@ -65,4 +65,9 @@ class Gradle extends BuildFactory {
         dsl.echo "[INFO] [gradle] Pipe the component. ${pipe}"
         dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
     }
+
+    @Override
+    void deploy(Object dsl) {
+
+    }
 }

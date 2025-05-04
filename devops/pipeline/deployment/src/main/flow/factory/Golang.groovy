@@ -23,4 +23,9 @@ class Golang extends BuildFactory {
     void build(def dsl) {
         dsl.COMPILER
     }
+
+    @Override
+    void deploy(Object dsl) {
+
+    }
 }

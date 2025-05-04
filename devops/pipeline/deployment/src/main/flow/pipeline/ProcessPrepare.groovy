@@ -1,6 +1,7 @@
 package main.flow.pipeline
 
 import main.flow.base.PipelineBase
+import main.flow.factory.BuildFactory
 import main.flow.factory.CompilerFactory
 import main.flow.global.Configuration
 
@@ -35,14 +36,14 @@ class ProcessPrepare extends PipelineBase {
     }
 
     def init(String process, String solution, String compiler) {
-
-        Console("[INFO] stage ${this._dsl.env.STAGE_NAME}")
-
+        this._dsl.LAST_STEP = this._dsl.env.STAGE_NAME
         this.configuration.withConfig(STATIC_CONFIG).execute()
-
         Console("[INFO] Init process prepare compiler factory with [${compiler}]")
         def factory = CompilerFactory.getCompiler(compiler)
         Console("[INFO] Process prepare compiler factory with [${factory}]")
         factory.build(this._dsl)
+        BuildFactory.commit(this._dsl)
+        BuildFactory.gitflow(this._dsl, process)
+        BuildFactory.image(this._dsl, process)
     }
 }
