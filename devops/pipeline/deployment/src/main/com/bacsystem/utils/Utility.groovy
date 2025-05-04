@@ -1,6 +1,7 @@
 package main.com.bacsystem.utils
 
-import main.com.bacsystem.constants.IConstants
+
+import main.com.bacsystem.enums.PipelineProcess
 
 /**
  * <b>Utility</b>
@@ -73,7 +74,7 @@ class Utility {
     }
 
     static def flowType(String process) {
-        return IConstants.PipelineProcess.get(process)
+        return PipelineProcess.get(process)
     }
 
     static def params(def dsl) {

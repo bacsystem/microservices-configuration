@@ -44,19 +44,23 @@ class Staging extends PipelineBase {
     def getCompiler() {
         return compiler(this._dsl)
     }
-
+/*
     def getSetting(String process = "", String solution = "", String compiler) {
         console("[INFO] Iniciando construcción: Proceso: ${process}, Solución: ${solution}, Compilador: ${compiler}", this._dsl)
         this.processPrepare.init(process, solution, compiler)
         console("[INFO] Construcción completada para ${solution} utilizando ${compiler}", this._dsl)
     }
 
+ */
+/*
     def test(Map param = [:]) {
         console("[INFO] Init test process: env ${this._dsl.env.BRANCH_NAME}", this._dsl)
         console("[INFO] Init test process: env ${this._dsl.BRANCH_NAME}", this._dsl)
         console("[INFO] Init test process: env ${param}", this._dsl)
         //this.processTest.init(param., "solution")
     }
+
+ */
 
     def image() {}
 
