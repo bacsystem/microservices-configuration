@@ -18,6 +18,7 @@ package main.flow.factory
 
 
 class Gradle extends BuildFactory {
+
     @Override
     void build(def dsl) {
         dsl.COMPILER = "gradle"
@@ -25,7 +26,15 @@ class Gradle extends BuildFactory {
             dsl.sh "gradle wrapper"
         }
         dsl.echo "[INFO] [gradle] Starting the construction of the component."
+        def propertyFile = 'properties.tmp'
         dsl.sh "chmod +x ./gradlew"
-        dsl.echo "[INFO] [gradle] Successfully complete the construction of the component."
+        dsl.sh "./gradlew -q properties > ${propertyFile}"
+        String version = readProperties(propertyFile, "version", dsl)
+
+        dsl.echo "[INFO] [gradle] Successfully complete the construction of the component. ${version}"
+    }
+
+    static String readProperties(String file, String property, def dsl) {
+        return dsl.sh(script: "cat ${file} | grep '${property}:' | awk '{print \$2}'", returnStdout: true).trim()
     }
 }
