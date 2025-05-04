@@ -55,7 +55,7 @@ class Utility {
 
         Compiler.compilerFiles().each { key, value ->
             if (exist(key, dsl)) {
-                detected = key
+                detected = value.GetMgn()
                 return
             }
         }

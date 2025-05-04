@@ -45,6 +45,10 @@ enum Compiler {
         return this._file
     }
 
+    String GetMgn() {
+        return this._mgn
+    }
+
     static String get(String val) {
         def v = values().find { it._mgn == val }
         return v?.value()
