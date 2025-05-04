@@ -111,8 +111,8 @@ class Staging extends PipelineBase {
 
     def getBuild(String process = "", String solution = "", String compiler) {
         Console("[INFO] Iniciando construcción: Proceso: ${process}, Solución: ${solution}, Compilador: ${compiler}")
-        Console("[INFO] Construcción completada para ${solution} utilizando ${compiler}")
         this.processPrepare.init(process, solution, compiler)
+        Console("[INFO] Construcción completada para ${solution} utilizando ${compiler}")
     }
 
     def test() {}

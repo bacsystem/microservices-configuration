@@ -59,7 +59,7 @@ def call(Map params = [:]) {
 
             stage('Unit Test') {
                 steps {
-                    echo "Unit Test... ${ env.ENVIRONMENT}"
+                    echo "Unit Test... ${ ENVIRONMENT}"
                 }
             }
 
