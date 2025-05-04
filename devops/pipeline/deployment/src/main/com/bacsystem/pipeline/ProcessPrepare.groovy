@@ -1,11 +1,6 @@
 package main.com.bacsystem.pipeline
 
 import main.com.bacsystem.base.PipelineBase
-import main.com.bacsystem.factory.BuildFactory
-import main.com.bacsystem.factory.CompilerFactory
-import main.com.bacsystem.global.Configuration
-
-import static main.com.bacsystem.utils.Utility.console
 
 /**
  * <b>Prepare</b>
@@ -33,8 +28,8 @@ class ProcessPrepare extends PipelineBase {
 
     ProcessPrepare(def dsl) {
         super(dsl)
-        console("[INFO] load prepare process", dsl)
-       // this.configuration = new Configuration(dsl)
+        dsl.echo "[INFO] load prepare process"
+        // this.configuration = new Configuration(dsl)
     }
 /*
     def init(String process, String solution, String compiler) {
