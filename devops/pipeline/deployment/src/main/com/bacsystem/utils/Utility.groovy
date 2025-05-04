@@ -90,7 +90,8 @@ class Utility {
     }
 
     static def findParams(def dsl) {
-        console("[INFO] Searching for configuration files in the repository")
+        console("[INFO] Searching for configuration files in the repository", dsl)
+
         def deployDir = 'deploy-config'
         def configRepo = 'https://github.com/dbacilio88/microservices-configuration.git'
         def credentialsId = 'github-jenkins-ssh'
@@ -128,7 +129,7 @@ class Utility {
         def agent = appData.agent ?: 'default-agent'
 
         def solution = appData.group ?: 'default-group'
-        console("[INFO] Configuration files found in the repository")
+        console("[INFO] Configuration files found in the repository", dsl)
         return [agent, solution]
     }
 
