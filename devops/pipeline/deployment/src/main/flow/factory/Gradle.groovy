@@ -31,9 +31,10 @@ class Gradle extends BuildFactory {
         dsl.echo "[INFO] [gradle] Starting the construction of the component."
         def propertyFile = 'properties.tmp'
         dsl.sh "chmod +x ./gradlew"
+        dsl.sh "./gradlew -q properties"
         dsl.sh "./gradlew -q properties > ${propertyFile}"
         String version = readProperties(propertyFile, "version", dsl)
-        String group = readProperties(propertyFile, "version", dsl)
+        String group = readProperties(propertyFile, "group", dsl)
         String type = readProperties(propertyFile, "type", dsl)
         String solution = readProperties(propertyFile, "solution", dsl) ? readProperties(propertyFile, "solution", dsl) : readProperties(propertyFile, "app.solution", dsl)
         String name = Utility.repository(dsl)
