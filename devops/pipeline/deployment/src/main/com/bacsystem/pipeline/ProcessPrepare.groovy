@@ -43,9 +43,9 @@ class ProcessPrepare extends PipelineBase {
         this.configuration.withConfig(STATIC_CONFIG).execute()
         String compiler = findCompiler(this._dsl)
         console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
-        def compilerFactory = CompilerFactory.getCompiler(compiler,this._dsl)
+        def compilerFactory = CompilerFactory.getCompiler(compiler, this._dsl)
         console("[INFO] Process prepare compiler factory with [${compilerFactory}]", this._dsl)
-        compilerFactory.compiler(compiler)
+        compilerFactory.compiler(this._dsl)
         //def flowFactory = FlowFactory.getFlowFactory(process)
 
         //  console("[INFO] Process flow factory with [${flowFactory}]", this._dsl)

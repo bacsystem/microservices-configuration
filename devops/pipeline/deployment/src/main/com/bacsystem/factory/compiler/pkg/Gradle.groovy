@@ -26,7 +26,7 @@ import static main.com.bacsystem.utils.Utility.exist
 class Gradle extends ICompilerFactory {
 
     @Override
-    void compiler(Object dsl) {
+    void compiler(def dsl) {
 
         console("[INFO] Starting the preparation process for gradle in jenkins", dsl)
 
