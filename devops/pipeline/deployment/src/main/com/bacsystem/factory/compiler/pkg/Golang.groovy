@@ -29,6 +29,11 @@ class Golang extends ICompilerFactory {
     }
 
     @Override
+    void sdk(Object dsl) {
+
+    }
+
+    @Override
     void test(Object dsl) {
 
     }

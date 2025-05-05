@@ -13,6 +13,7 @@ def call(Map params = [:]) {
         tools {
             maven 'maven'
             gradle 'gradle'
+            jdk 'jdk-21'
         }
 
         environment {

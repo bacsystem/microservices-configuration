@@ -49,6 +49,32 @@ class Gradle extends ICompilerFactory {
     }
 
     @Override
+    void sdk(Object dsl) {
+
+        def javaPath = sh(
+                script: """
+                            if command -v update-alternatives > /dev/null; then
+                                update-alternatives --list java | grep 'java-${dsl.env.JDK}' | sed 's:/bin/java::' | head -n1
+                            else
+                                find /usr/lib/jvm -maxdepth 1 -type d -name "*java-${dsl.env.JDK}*" | head -n1
+                            fi
+                        """,
+                returnStdout: true
+        ).trim()
+
+        if (!javaPath) {
+            dsl.error "❌ No se encontró Java 21 instalado en el agente."
+        }
+
+        dsl.env.JAVA_HOME = javaPath
+        dsl.env.PATH = "${javaPath}/bin:${env.PATH}"
+        dsl.echo "✅ JAVA_HOME detectado: ${env.JAVA_HOME}"
+        dsl.sh 'java -version'
+
+
+    }
+
+    @Override
     void test(Object dsl) {
 
     }
@@ -69,6 +95,7 @@ class Gradle extends ICompilerFactory {
     @Override
     void build(Object dsl) {
         arguments()
+        dsl.echo "cmd: ${COMPILER_BASE} ${args} ${TASKS}"
         dsl.sh "${COMPILER_BASE} ${args} ${TASKS}"
     }
 
@@ -79,6 +106,7 @@ class Gradle extends ICompilerFactory {
         dsl.env.VERSION_NUM = readProperties(propertyFile, "version") ?: readProperties(propertyFile, "sdk_version_number")
         dsl.env.FOLDER = readProperties(propertyFile, 'pipelineFolderModule')
         dsl.env.PIPE_VERSION = readProperties(propertyFile, 'pipelineVersion')
+        dsl.env.JDK = readProperties(propertyFile, 'sourceCompatibility') ?: readProperties(propertyFile, 'targetCompatibility')
         dsl.env.APP_NAME = repository(dsl)
         dsl.env.IMAGE = dsl.env.APP_NAME
         dsl.env.APP_TYPE = readProperties(propertyFile, "type")

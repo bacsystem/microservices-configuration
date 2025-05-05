@@ -18,8 +18,14 @@ package main.com.bacsystem.factory.compiler
 
 
 abstract class ICompilerFactory {
+
     abstract void compiler(def dsl)
+
+    abstract void sdk(def dsl)
+
     abstract void test(def dsl)
+
     abstract void arguments()
+
     abstract void build(def dsl)
 }
