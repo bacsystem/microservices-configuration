@@ -63,7 +63,9 @@ class Gradle extends ICompilerFactory {
         dsl.env.APP_TYPE = readProperties(propertyFile, "type")
         dsl.env.SOLUTION = readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "app.solution")
         dsl.env.SONAR_KEY = "${readProperties(propertyFile, 'group')}:${dsl.env.IMAGE}"
-        dsl.echo "env ${dsl.env}"
+        dsl.env.each { key, value ->
+            dls.echo "${key}=${value}"
+        }
         console("[INFO] [gradle] Successfully complete the construction of the component.", dsl)
 
     }
