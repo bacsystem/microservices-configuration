@@ -47,7 +47,7 @@ class Staging extends PipelineBase {
         } catch (err) {
             this._dsl.error "[ERROR] Process failed with error [${err}]"
         } finally {
-            console("[INFO] Setting load successfully for jenkins flow", this._dsl)
+            console("[INFO] Setting load for jenkins flow", this._dsl)
         }
     }
 }

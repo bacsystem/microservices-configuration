@@ -53,7 +53,7 @@ class Configuration extends PipelineBase {
      */
     void execute() {
         writeToFile(configName, getResourceContent())
-        this._dsl.sh "cat ./${configName}"
+        //this._dsl.sh "cat ./${configName}"
 
         def envVars = this._dsl.sh(script: """#!/bin/bash
             set -a
