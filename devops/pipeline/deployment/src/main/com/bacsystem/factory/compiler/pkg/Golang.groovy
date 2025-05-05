@@ -29,6 +29,16 @@ class Golang extends ICompilerFactory {
     }
 
     @Override
+    void test(Object dsl) {
+
+    }
+
+    @Override
+    void arguments() {
+
+    }
+
+    @Override
     void build(Object dsl) {
 
     }

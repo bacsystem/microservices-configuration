@@ -27,6 +27,16 @@ class Maven extends ICompilerFactory {
     }
 
     @Override
+    void test(Object dsl) {
+
+    }
+
+    @Override
+    void arguments() {
+
+    }
+
+    @Override
     void build(Object dsl) {
 
     }

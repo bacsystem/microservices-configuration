@@ -1,8 +1,10 @@
 package main.com.bacsystem.pipeline
 
 import main.com.bacsystem.base.PipelineBase
+import main.com.bacsystem.factory.compiler.CompilerFactory
 
 import static main.com.bacsystem.utils.Utility.console
+import static main.com.bacsystem.utils.Utility.findCompiler
 
 /**
  * <b>ProcessTest</b>
@@ -44,6 +46,8 @@ class ProcessTest extends PipelineBase {
         console("[INFO] URL_GH_PR ${URL_GH_PR}", this._dsl)
         console("[INFO] LAST_STEP ${this._dsl.env.LAST_STEP}", this._dsl)
         console("[INFO] COMPILER ${this._dsl.env.COMPILER}", this._dsl)
+        def compilerFactory = CompilerFactory.getCompiler("${this._dsl.env.COMPILER}", this._dsl)
+        compilerFactory.build(this._dsl)
 
     }
 }

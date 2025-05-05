@@ -22,6 +22,12 @@ import static main.com.bacsystem.utils.Utility.*
 
 
 class Gradle extends ICompilerFactory {
+    final def COMPILER_BASE = "sh gradlew"
+    final def TASKS = "test"
+    final def DEBUG = "--debug"
+    def args
+    String gradleHome
+    boolean debug
 
     @Override
     void compiler(def dsl) {
@@ -43,8 +49,27 @@ class Gradle extends ICompilerFactory {
     }
 
     @Override
-    void build(Object dsl) {
+    void test(Object dsl) {
 
+    }
+
+    @Override
+    void arguments() {
+        args = ""
+        if (debug) {
+            args += " ${DEBUG}"
+        }
+
+        if (gradleHome) {
+            args += " -g ${gradleHome}"
+        }
+
+    }
+
+    @Override
+    void build(Object dsl) {
+        arguments()
+        dsl.sh "${COMPILER_BASE} ${args} ${TASKS}"
     }
 
     static void readParameter(String propertyFile, def dsl) {
