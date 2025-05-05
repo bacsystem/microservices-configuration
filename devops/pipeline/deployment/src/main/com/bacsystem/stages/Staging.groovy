@@ -56,6 +56,7 @@ class Staging extends PipelineBase {
 
     def testing() {
         console("[INFO] Starting unit tests for the component -> [${this._dsl.env.APP_NAME}] ", this._dsl)
+        this.processTest.init()
     }
 
     def saveReport() {

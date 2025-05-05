@@ -47,6 +47,7 @@ def call(Map params = [:]) {
                         echo "Unit Branch... ${BRANCH_NAME}"
                         echo "Unit Test... ${ENVIRONMENT}"
                         staging.testing()
+                        
                     }
                 }
 
