@@ -1,10 +1,8 @@
 package main.com.bacsystem.factory.compiler.pkg
 
-
 import main.com.bacsystem.factory.compiler.ICompilerFactory
 
-import static main.com.bacsystem.utils.Utility.console
-import static main.com.bacsystem.utils.Utility.exist
+import static main.com.bacsystem.utils.Utility.*
 
 /**
  * <b>Gradle</b>
@@ -52,14 +50,14 @@ class Gradle extends ICompilerFactory {
         //validar la version y el agente de jdk  y docker
     }
 
-    void readParameter(String propertyFile, def dsl) {
+    static void readParameter(String propertyFile, def dsl) {
         def readProperties = { file, property ->
             return dsl.sh(script: "cat ${file} | grep '${property}:' | awk '{print \$2}'", returnStdout: true).trim()
         }
 
         String version = readProperties(propertyFile, "version") ?: readProperties(propertyFile, "sdk_version_number")
         //dsl.env.VERSION_NUM    = dsl.env.VERSION?.replace("-SNAPSHOT", "")
-        String name = Utility.repository(dsl)
+        String name = repository(dsl)
         //dsl.env.IMAGE          = dsl.env.APP_NAME
         //dsl.env.FOLDER = readProperties(propertyFile, 'pipelineFolderModule')
         String module = readProperties(propertyFile, 'pipelineFolderModule')
