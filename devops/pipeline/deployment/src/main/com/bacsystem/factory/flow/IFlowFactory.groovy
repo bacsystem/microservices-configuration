@@ -65,8 +65,6 @@ abstract class IFlowFactory {
         }
 
         dsl.env.DISPLAY = ""
-        console("[INFO] Tag display: [${dsl.env.DISPLAY}]", dsl)
-        console("[INFO] Tag prefix: [${dsl.env.PREFIX}]", dsl)
     }
 
     static void environments(String flow, def dsl) {
@@ -84,7 +82,6 @@ abstract class IFlowFactory {
                 } else if (branch == "uat") {
                     env.ENVIRONMENT = "uat"
                 }
-                dsl.echo "ENVIRONMENT: ${env.ENVIRONMENT}"
                 break
             default:
                 console("Branching flow '${flow}' is not configured", dsl)
@@ -94,6 +91,5 @@ abstract class IFlowFactory {
     static void nexus(def dsl) {
         def env = dsl.env
         env.REGISTRY_IMAGE = "${env.REGISTRY_URL}/" + env.IMAGE + ":" + env.IMAGE_TAG
-        console("[INFO] REGISTRY_IMAGE: [${env.REGISTRY_IMAGE}]", dsl)
     }
 }
