@@ -24,7 +24,7 @@ import main.com.bacsystem.factory.flow.scm.GitlabFlow
 
 class FlowFactory {
 
-    static IFlowFactory getFlowFactory(String process) {
+    static IFlowFactory getFlowFactory(String process, def dsl) {
         switch (process) {
             case WorkFlow.GIT_FLOW.getValue():
                 return new GitFlow()
@@ -33,7 +33,7 @@ class FlowFactory {
             case WorkFlow.GITLAB_FLOW.getValue():
                 return new GitlabFlow()
             default:
-                error "[ERROR] Not process get flow factory"
+                dsl.error "[ERROR] Not process get flow factory"
         }
     }
 }

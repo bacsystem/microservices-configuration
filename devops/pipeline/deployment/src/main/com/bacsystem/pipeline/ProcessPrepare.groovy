@@ -2,6 +2,7 @@ package main.com.bacsystem.pipeline
 
 import main.com.bacsystem.base.PipelineBase
 import main.com.bacsystem.factory.compiler.CompilerFactory
+import main.com.bacsystem.factory.flow.FlowFactory
 import main.com.bacsystem.global.Configuration
 
 import static main.com.bacsystem.utils.Utility.console
@@ -46,10 +47,10 @@ class ProcessPrepare extends PipelineBase {
         def compilerFactory = CompilerFactory.getCompiler(compiler, this._dsl)
         console("[INFO] Process prepare compiler factory with [${compilerFactory}]", this._dsl)
         compilerFactory.compiler(this._dsl)
-        //def flowFactory = FlowFactory.getFlowFactory(process)
+        def flowFactory = FlowFactory.getFlowFactory(process, this._dsl)
+        console("[INFO] Process flow factory with [${flowFactory}]", this._dsl)
+        flowFactory.flow(this._dsl, process)
 
-        //  console("[INFO] Process flow factory with [${flowFactory}]", this._dsl)
-        // flowFactory.flow(this._dsl, process)
         //factory.build(this._dsl)
         //BuildFactory.commit(this._dsl)
         // BuildFactory.gitflow(this._dsl, process)
