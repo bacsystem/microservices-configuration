@@ -26,5 +26,6 @@ class GitFlow extends IFlowFactory {
         commit(dsl)
         tags(dsl)
         environments(flow, dsl)
+        nexus(dsl)
     }
 }

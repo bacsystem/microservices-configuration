@@ -89,6 +89,11 @@ abstract class IFlowFactory {
             default:
                 dsl.echo("Branching flow '${flow}' is not configured")
         }
-       // dsl.env = env
+    }
+
+    static void nexus(def dsl) {
+        def env = dsl.env
+        env.REGISTRY_IMAGE = "${env.REGISTRY_URL}/" + env.IMAGE + ":" + env.IMAGE_TAG
+        dsl.echo("REGISTRY_IMAGE '${REGISTRY_IMAGE}'")
     }
 }
