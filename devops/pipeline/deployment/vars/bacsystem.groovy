@@ -42,12 +42,16 @@ def call(Map params = [:]) {
             }
 
             stage('Unit Test') {
+                agent {
+                    label agentLabel
+                }
                 steps {
+
                     script {
                         echo "Unit Branch... ${BRANCH_NAME}"
                         echo "Unit Test... ${ENVIRONMENT}"
                         staging.testing()
-                        
+
                     }
                 }
 
