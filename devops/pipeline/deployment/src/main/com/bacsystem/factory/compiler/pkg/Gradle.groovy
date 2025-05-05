@@ -42,7 +42,7 @@ class Gradle extends ICompilerFactory {
         // Prepare gradlew
         String propertyFile = 'properties.tmp'
         dsl.sh "chmod +x ./gradlew"
-        //dsl.sh "./gradlew -q properties"
+        dsl.sh "./gradlew -q properties"
         dsl.sh "./gradlew -q properties > ${propertyFile}"
 
         readParameter(propertyFile, dsl)
@@ -55,26 +55,16 @@ class Gradle extends ICompilerFactory {
             return dsl.sh(script: "cat ${file} | grep '${property}:' | awk '{print \$2}'", returnStdout: true).trim()
         }
 
-        String version = readProperties(propertyFile, "version") ?: readProperties(propertyFile, "sdk_version_number")
-        //dsl.env.VERSION_NUM    = dsl.env.VERSION?.replace("-SNAPSHOT", "")
-        String name = repository(dsl)
-        //dsl.env.IMAGE          = dsl.env.APP_NAME
-        //dsl.env.FOLDER = readProperties(propertyFile, 'pipelineFolderModule')
-        String module = readProperties(propertyFile, 'pipelineFolderModule')
-        //dsl.env.PIPE_VERSION   = readProperties(propertyFile,'pipelineVersion')
-        String pipe = readProperties(propertyFile, 'pipelineVersion')
-        String group = readProperties(propertyFile, "group")
-        String type = readProperties(propertyFile, "type")
-        String solution = readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "app.solution")
-        //dsl.env.SONAR_KEY      = "${readProperties(propertyFile,'group')}:${dsl.env.IMAGE}"
-        console("[INFO] [gradle] Version the component. ${version}", dsl)
-        console("[INFO] [gradle] Group the component. ${group}", dsl)
-        console("[INFO] [gradle] Type the component. ${type}", dsl)
-        console("[INFO] [gradle] Solution the component. ${solution}", dsl)
-        console("[INFO] [gradle] Name the component. ${name}", dsl)
-        console("[INFO] [gradle] Module the component. ${module}", dsl)
-        console("[INFO] [gradle] Pipe the component. ${pipe}", dsl)
-        console("[INFO] [gradle] Successfully complete the construction of the component.", dsl)
+        dsl.env.VERSION_NUM = readProperties(propertyFile, "version") ?: readProperties(propertyFile, "sdk_version_number")
+        dsl.env.FOLDER = readProperties(propertyFile, 'pipelineFolderModule')
+        dsl.env.PIPE_VERSION = readProperties(propertyFile, 'pipelineVersion')
+        dsl.env.APP_NAME = repository(dsl)
+        dsl.env.IMAGE = dsl.env.APP_NAME
+        dsl.env.APP_TYPE = readProperties(propertyFile, "type")
+        dsl.env.SOLUTION = readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "solution") ?: readProperties(propertyFile, "app.solution")
+        dsl.env.SONAR_KEY = "${readProperties(propertyFile, 'group')}:${dsl.env.IMAGE}"
+
+        console("[INFO] [gradle] Successfully complete the construction of the component.", dsl.env)
 
     }
 }
