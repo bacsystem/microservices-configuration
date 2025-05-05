@@ -44,21 +44,31 @@ abstract class IFlowFactory {
 
     static void tags(def dsl) {
         def branchName = dsl.env.BRANCH_NAME
+
         if (branchName == "master" || branchName == "main") {
             dsl.env.PREFIX = ""
         }
+
         if (branchName == "uat") {
             dsl.env.PREFIX = "-beta"
         }
+
         if (branchName == "release" || branchName.startsWith("release")) {
             dsl.env.PREFIX = "-alpha" + "${dsl.env.PREFIX}"
         }
+
         if (branchName == "fix" || branchName.startsWith("hotfix")) {
             dsl.env.PREFIX = "-patch" + "${dsl.env.PREFIX}"
         }
+
         if (branchName == "test") {
             dsl.env.PREFIX = "-beta"
         }
+
+        if (branchName == "develop") {
+            dsl.env.PREFIX = "-dev"
+        }
+
         dsl.env.DISPLAY = ""
         console("[INFO] Tag display: [${dsl.env.DISPLAY}]", dsl)
         console("[INFO] Tag prefix: [${dsl.env.PREFIX}]", dsl)
