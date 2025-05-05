@@ -89,6 +89,6 @@ abstract class IFlowFactory {
             default:
                 dsl.echo("Branching flow '${flow}' is not configured")
         }
-        dsl.env = env
+       // dsl.env = env
     }
 }
