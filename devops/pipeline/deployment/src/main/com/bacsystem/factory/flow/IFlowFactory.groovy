@@ -22,7 +22,7 @@ import static main.com.bacsystem.utils.Utility.console
 
 abstract class IFlowFactory {
 
-    abstract void flow(def dsl, def type)
+    abstract void flow(def type, def dsl)
 
     static void commit(def dsl) {
         def logger = { param -> dsl.sh(returnStdout: true, script: param) }
@@ -60,7 +60,7 @@ abstract class IFlowFactory {
             dsl.env.PREFIX = "-beta"
         }
         dsl.env.DISPLAY = ""
-        console("[INFO] Tag display: [${dsl.env.DISPLAY}]")
-        console("[INFO] Tag prefix: [${dsl.env.PREFIX}]")
+        console("[INFO] Tag display: [${dsl.env.DISPLAY}]", dsl)
+        console("[INFO] Tag prefix: [${dsl.env.PREFIX}]", dsl)
     }
 }

@@ -49,7 +49,7 @@ class ProcessPrepare extends PipelineBase {
         compilerFactory.compiler(this._dsl)
         def flowFactory = FlowFactory.getFlowFactory(process, this._dsl)
         console("[INFO] Process flow factory with [${flowFactory}]", this._dsl)
-        flowFactory.flow(this._dsl, process)
+        flowFactory.flow(process, this._dsl)
 
         //factory.build(this._dsl)
         //BuildFactory.commit(this._dsl)

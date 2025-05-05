@@ -22,7 +22,7 @@ import main.com.bacsystem.factory.flow.IFlowFactory
 class GitFlow extends IFlowFactory {
 
     @Override
-    void flow(def dsl, def type) {
+    void flow(def type, def dsl) {
         commit(dsl)
         tags(dsl)
     }

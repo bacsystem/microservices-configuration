@@ -21,7 +21,7 @@ import main.com.bacsystem.factory.flow.IFlowFactory
 
 class GitlabFlow extends IFlowFactory {
     @Override
-    void flow(Object dsl, Object type) {
+    void flow(Object type, Object dsl) {
         commit(dsl)
         tags(dsl)
     }
