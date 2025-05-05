@@ -48,8 +48,15 @@ def call(Map params = [:]) {
                         echo "Unit Test... ${ENVIRONMENT}"
                         staging.testing()
                     }
+                }
 
-
+                post {
+                    always {
+                        script {
+                            echo "[INFO] Always save: Test Jenkins"
+                            staging.saveReport()
+                        }
+                    }
                 }
             }
 
