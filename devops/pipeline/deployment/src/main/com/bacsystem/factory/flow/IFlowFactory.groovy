@@ -33,13 +33,6 @@ abstract class IFlowFactory {
         dsl.env.PREFIX = ".B${dsl.env.COMMITID}"
         dsl.env.PREFIX_DISPLAY = ".B${dsl.env.COMMITID}"
         dsl.env.DISPLAY = ".B${dsl.env.COMMITID}"
-        console("REPOSITORY_EMAIL: ${dsl.env.REPOSITORY_EMAIL}", dsl)
-        console("LAST_COMMIT: ${dsl.env.LAST_COMMIT}", dsl)
-        console("BUILD_GIT_NR: ${dsl.env.BUILD_GIT_NR}", dsl)
-        console("COMMITID: ${dsl.env.COMMITID}", dsl)
-        console("PREFIX: ${dsl.env.PREFIX}", dsl)
-        console("PREFIX_DISPLAY: ${dsl.env.PREFIX_DISPLAY}", dsl)
-        console("DISPLAY: ${dsl.env.DISPLAY}", dsl)
     }
 
     static void tags(def dsl) {
@@ -50,7 +43,7 @@ abstract class IFlowFactory {
         }
 
         if (branchName == "uat") {
-            dsl.env.PREFIX = "-beta"
+            dsl.env.PREFIX = "-beta" + "${dsl.env.PREFIX}"
         }
 
         if (branchName == "release" || branchName.startsWith("release")) {
@@ -62,11 +55,11 @@ abstract class IFlowFactory {
         }
 
         if (branchName == "test") {
-            dsl.env.PREFIX = "-beta"
+            dsl.env.PREFIX = "-beta" + "${dsl.env.PREFIX}"
         }
 
         if (branchName == "develop") {
-            dsl.env.PREFIX = "-dev"
+            dsl.env.PREFIX = "-dev" + "${dsl.env.PREFIX}"
         }
 
         dsl.env.DISPLAY = ""
