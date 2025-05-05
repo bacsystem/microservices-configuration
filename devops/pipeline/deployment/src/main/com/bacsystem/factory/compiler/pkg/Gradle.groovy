@@ -36,7 +36,7 @@ class Gradle extends ICompilerFactory {
 
         //dsl.env.GRADLE_USER_HOME = "${dsl.env.JENKINS_HOME}/.gradle"
 
-        if (!exist("./gradle/wrapper/gradle-wrapper.jar")) {
+        if (!exist("./gradle/wrapper/gradle-wrapper.jar",dsl)) {
             dsl.sh "gradle wrapper"
         }
 
