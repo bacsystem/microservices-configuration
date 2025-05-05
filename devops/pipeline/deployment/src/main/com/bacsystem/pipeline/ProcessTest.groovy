@@ -43,6 +43,7 @@ class ProcessTest extends PipelineBase {
         console("[INFO] DESCRIPTION_GH_PR ${DESCRIPTION_GH_PR}", this._dsl)
         console("[INFO] URL_GH_PR ${URL_GH_PR}", this._dsl)
         console("[INFO] LAST_STEP ${this._dsl.env.LAST_STEP}", this._dsl)
+        console("[INFO] COMPILER ${this._dsl.env.COMPILER}", this._dsl)
 
     }
 }

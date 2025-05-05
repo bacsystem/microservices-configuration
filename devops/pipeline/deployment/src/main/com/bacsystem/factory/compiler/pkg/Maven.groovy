@@ -25,4 +25,9 @@ class Maven extends ICompilerFactory {
     void compiler(Object dsl) {
         def pom = dsl.readMavenPom()
     }
+
+    @Override
+    void build(Object dsl) {
+
+    }
 }

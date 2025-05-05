@@ -27,4 +27,9 @@ class Golang extends ICompilerFactory {
     void compiler(Object dsl) {
 
     }
+
+    @Override
+    void build(Object dsl) {
+
+    }
 }

@@ -43,6 +43,7 @@ class ProcessPrepare extends PipelineBase {
         this._dsl.env.LAST_STEP = this._dsl.env.STAGE_NAME
         this.configuration.withConfig(STATIC_CONFIG).execute()
         String compiler = findCompiler(this._dsl)
+        this._dsl.env.COMPILER = "${compiler}"
         console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
         def compilerFactory = CompilerFactory.getCompiler(compiler, this._dsl)
         compilerFactory.compiler(this._dsl)

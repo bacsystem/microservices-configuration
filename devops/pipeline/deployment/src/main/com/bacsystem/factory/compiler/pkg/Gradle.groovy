@@ -42,6 +42,11 @@ class Gradle extends ICompilerFactory {
         //validar la version y el agente de jdk  y docker
     }
 
+    @Override
+    void build(Object dsl) {
+
+    }
+
     static void readParameter(String propertyFile, def dsl) {
         def readProperties = { file, property ->
             return dsl.sh(script: "cat ${file} | grep '${property}:' | awk '{print \$2}'", returnStdout: true).trim()
