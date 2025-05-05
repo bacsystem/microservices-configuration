@@ -4,6 +4,7 @@ package main.com.bacsystem.factory.flow
 import main.com.bacsystem.enums.WorkFlow
 
 import static main.com.bacsystem.utils.Utility.console
+import static main.com.bacsystem.utils.Utility.displayNames
 
 /**
  * <b>BuildFlow</b>
@@ -72,6 +73,11 @@ abstract class IFlowFactory {
         env.IMAGE_TAG = "${env.VERSION_NUM}${env.PREFIX}"
         env.DISPLAY_NAME = "${env.VERSION_NUM}${env.PREFIX_DISPLAY}"
         env.ENVIRONMENT = "dev"
+        env.JOB_NAME_F = displayNames(dsl.currentBuild)
+        console("JOB_NAME_F '${env.JOB_NAME_F}'", dsl)
+        dsl.currentBuild.displayName = env.DISPLAY_NAME
+        console("dsl.currentBuild.displayName '${dsl.currentBuild.displayName}'", dsl)
+
         def branch = env.BRANCH_NAME
         switch (flow) {
             case WorkFlow.GIT_FLOW.getValue():

@@ -124,4 +124,9 @@ class Utility {
     static void console(String msg, def dsl) {
         dsl.echo msg
     }
+
+    static String displayNames(def build) {
+        def project = build.rawBuild.project
+        return "${project.parent.displayName} (${project.displayName})"
+    }
 }
