@@ -36,23 +36,23 @@ class Gradle extends ICompilerFactory {
 
         //dsl.env.GRADLE_USER_HOME = "${dsl.env.JENKINS_HOME}/.gradle"
 
-        if (!exist("./gradle/wrapper/gradle-wrapper.jar",dsl)) {
+        if (!exist("./gradle/wrapper/gradle-wrapper.jar", dsl)) {
             dsl.sh "gradle wrapper"
         }
 
-        console("[INFO] [gradle] Starting the construction of the component.", dsl)
+        console("[INFO] [gradle] Starting read properties of the component.", dsl)
         // Prepare gradlew
-        def propertyFile = 'properties.tmp'
+        String propertyFile = 'properties.tmp'
         dsl.sh "chmod +x ./gradlew"
         //dsl.sh "./gradlew -q properties"
         dsl.sh "./gradlew -q properties > ${propertyFile}"
 
-        readParameter(dsl)
+        readParameter(propertyFile, dsl)
         console("[INFO] Finished preparation process for gradle in jenkins", dsl)
         //validar la version y el agente de jdk  y docker
     }
 
-    void readParameter(def dsl) {
+    void readParameter(String propertyFile, def dsl) {
         def readProperties = { file, property ->
             return dsl.sh(script: "cat ${file} | grep '${property}:' | awk '{print \$2}'", returnStdout: true).trim()
         }
