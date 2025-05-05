@@ -1,7 +1,4 @@
 package main.com.bacsystem.factory
-
-import main.com.bacsystem.constants.IConstants
-
 /**
  * <b>LoadFactory</b>
  * <p>
@@ -25,31 +22,6 @@ abstract class BuildFactory {
 
 
     abstract void registry(def dsl)
-
-    static void image(def dsl, String process) {
-        def env = dsl.env
-        env.IMAGE_TAG = "${env.VERSION_NUM}${env.PREFIX}"
-        env.DISPLAY_NAME = "${env.VERSION_NUM}${env.PREFIX_DISPLAY}"
-        env.ENVIRONMENT = "dev"
-        def branch = env.BRANCH_NAME
-        switch (process) {
-            case IConstants.PipelineProcess.PROCESS.value():
-                if (branch == "master" || branch == "main") {
-                    env.ENVIRONMENT = "dev"
-                } else if (branch == "test") {
-                    env.ENVIRONMENT = "test"
-                } else if (branch == "uat") {
-                    env.ENVIRONMENT = "uat"
-                } else if (branch.startsWith("release/")) {
-                    env.ENVIRONMENT = "prod"
-                }
-                dsl.echo "ENVIRONMENT: ${env.ENVIRONMENT}"
-                break
-            default:
-                dsl.echo("Branching process '${process}' is not configured")
-        }
-        dsl.env = env
-    }
 
     static void deploy(def application, def environment, def image, def dsl) {
         dsl.env.APP_NAME = application

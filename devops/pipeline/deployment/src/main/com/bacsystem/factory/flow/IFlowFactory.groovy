@@ -1,6 +1,8 @@
 package main.com.bacsystem.factory.flow
 
 
+import main.com.bacsystem.enums.WorkFlow
+
 import static main.com.bacsystem.utils.Utility.console
 
 /**
@@ -22,7 +24,7 @@ import static main.com.bacsystem.utils.Utility.console
 
 abstract class IFlowFactory {
 
-    abstract void flow(def type, def dsl)
+    abstract void flow(String flow, def dsl)
 
     static void commit(def dsl) {
         def logger = { param -> dsl.sh(returnStdout: true, script: param) }
@@ -65,5 +67,28 @@ abstract class IFlowFactory {
         dsl.env.DISPLAY = ""
         console("[INFO] Tag display: [${dsl.env.DISPLAY}]", dsl)
         console("[INFO] Tag prefix: [${dsl.env.PREFIX}]", dsl)
+    }
+
+    static void environments(String flow, def dsl) {
+        def env = dsl.env
+        env.IMAGE_TAG = "${env.VERSION_NUM}${env.PREFIX}"
+        env.DISPLAY_NAME = "${env.VERSION_NUM}${env.PREFIX_DISPLAY}"
+        env.ENVIRONMENT = "dev"
+        def branch = env.BRANCH_NAME
+        switch (flow) {
+            case WorkFlow.GIT_FLOW.getValue():
+                if (branch == "master" || branch == "main") {
+                    env.ENVIRONMENT = "prod"
+                } else if (branch == "test") {
+                    env.ENVIRONMENT = "test"
+                } else if (branch == "uat") {
+                    env.ENVIRONMENT = "uat"
+                }
+                dsl.echo "ENVIRONMENT: ${env.ENVIRONMENT}"
+                break
+            default:
+                dsl.echo("Branching flow '${flow}' is not configured")
+        }
+        dsl.env = env
     }
 }

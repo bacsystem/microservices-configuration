@@ -22,8 +22,9 @@ import main.com.bacsystem.factory.flow.IFlowFactory
 class GithubFlow extends IFlowFactory {
 
     @Override
-    void flow(Object type, Object dsl) {
+    void flow(String flow, Object dsl) {
         commit(dsl)
         tags(dsl)
+        environments(flow, dsl)
     }
 }
