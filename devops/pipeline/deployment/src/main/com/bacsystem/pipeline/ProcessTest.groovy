@@ -37,12 +37,12 @@ class ProcessTest extends PipelineBase {
         String DESCRIPTION_GH_PR = 'Running Unit Tests'
         String URL_GH_PR = "${this._dsl.env.JOB_URL}${this._dsl.env.BUILD_NUMBER}/testReport"
         this._dsl.env.LAST_STEP = this._dsl.env.STAGE_NAME
-        console("[INFO] result ${result}")
-        console("[INFO] details ${details}")
-        console("[INFO] CONTEXT_GH_PR ${CONTEXT_GH_PR}")
-        console("[INFO] DESCRIPTION_GH_PR ${DESCRIPTION_GH_PR}")
-        console("[INFO] URL_GH_PR ${URL_GH_PR}")
-        console("[INFO] LAST_STEP ${this._dsl.env.LAST_STEP}")
+        console("[INFO] result ${result}", this._dsl)
+        console("[INFO] details ${details}", this._dsl)
+        console("[INFO] CONTEXT_GH_PR ${CONTEXT_GH_PR}", this._dsl)
+        console("[INFO] DESCRIPTION_GH_PR ${DESCRIPTION_GH_PR}", this._dsl)
+        console("[INFO] URL_GH_PR ${URL_GH_PR}", this._dsl)
+        console("[INFO] LAST_STEP ${this._dsl.env.LAST_STEP}", this._dsl)
 
     }
 }
