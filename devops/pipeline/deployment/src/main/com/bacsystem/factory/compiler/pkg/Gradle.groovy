@@ -28,6 +28,8 @@ class Gradle extends ICompilerFactory {
     @Override
     void compiler(Object dsl) {
 
+        console("[INFO] Starting the preparation process for gradle in jenkins", dsl)
+
         dsl.env.COMPILER = "gradle"
         dsl.env.IS_MAVEN_COMPILER = false
         dsl.env.COMPILER_BASE = "sh gradlew"
@@ -46,6 +48,7 @@ class Gradle extends ICompilerFactory {
         dsl.sh "./gradlew -q properties > ${propertyFile}"
 
         readParameter(dsl)
+        console("[INFO] Finished preparation process for gradle in jenkins", dsl)
         //validar la version y el agente de jdk  y docker
     }
 

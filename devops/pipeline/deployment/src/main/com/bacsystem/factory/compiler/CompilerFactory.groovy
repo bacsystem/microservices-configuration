@@ -23,14 +23,14 @@ import main.com.bacsystem.factory.compiler.pkg.Maven
 
 class CompilerFactory {
 
-    static ICompilerFactory getCompiler(String type) {
+    static ICompilerFactory getCompiler(String type, def dsl) {
         switch (type.toLowerCase()) {
             case Compiler.GRADLE.GetMgn():
                 return new Gradle()
             case Compiler.MAVEN.GetMgn():
                 return new Maven()
             default:
-                error "[ERROR] Not compiler factory"
+                dsl.error "[ERROR] Not compiler factory"
         }
     }
 }

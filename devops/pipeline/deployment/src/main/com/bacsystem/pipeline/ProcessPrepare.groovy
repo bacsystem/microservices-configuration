@@ -2,7 +2,6 @@ package main.com.bacsystem.pipeline
 
 import main.com.bacsystem.base.PipelineBase
 import main.com.bacsystem.factory.compiler.CompilerFactory
-import main.com.bacsystem.factory.flow.FlowFactory
 import main.com.bacsystem.global.Configuration
 
 import static main.com.bacsystem.utils.Utility.console
@@ -44,8 +43,7 @@ class ProcessPrepare extends PipelineBase {
         this.configuration.withConfig(STATIC_CONFIG).execute()
         String compiler = findCompiler(this._dsl)
         console("[INFO] Init process prepare compiler factory with [${compiler}]", this._dsl)
-
-        def compilerFactory = CompilerFactory.getCompiler(compiler)
+        def compilerFactory = CompilerFactory.getCompiler(compiler,this._dsl)
         console("[INFO] Process prepare compiler factory with [${compilerFactory}]", this._dsl)
         compilerFactory.compiler(compiler)
         //def flowFactory = FlowFactory.getFlowFactory(process)
