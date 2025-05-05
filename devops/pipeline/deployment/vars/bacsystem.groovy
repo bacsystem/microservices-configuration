@@ -29,54 +29,31 @@ def call(Map params = [:]) {
                 }
                 steps {
                     script {
-
                         echo "[INFO] Searching parameters in config deploy file."
-
                         (agentLabel, solutionProject) = staging.parameters()
-
                         if (agentLabel == null) {
                             agentLabel = "principal"
                         }
-
                         echo "[INFO] Found parameter -> { agent: [${agentLabel}] and solution project: [${solutionProject}] }"
-
                         sh "ls -la"
-
                         staging.settings(params, solutionProject)
-
-                        //echo "[INFO] Find the type of compiler to work with jenkins"
-                        //String compiler = staging.getCompiler()
-                        //echo "[INFO] Detected build tool: ${compiler}"
-                        //staging.getFlow(flowType)
-
-/*
-
-                        if (compiler != null) {
-                            staging.getSetting("${params.value}", solutionProject, compiler)
-                        } else {
-                            echo "No recognized build tool found. Skipping build process."
-                        }
-
- */
-
                     }
                 }
             }
-/*
+
             stage('Unit Test') {
                 steps {
                     script {
-
                         echo "Unit Branch... ${BRANCH_NAME}"
                         echo "Unit Test... ${ENVIRONMENT}"
-                        // staging.test(params)
+                        staging.testing()
                     }
 
 
                 }
             }
 
- */
+
 /*
             stage('Dependencies, Code Scan & Bugs') {
                 steps {

@@ -2,6 +2,7 @@ package main.com.bacsystem.stages
 
 import main.com.bacsystem.base.PipelineBase
 import main.com.bacsystem.pipeline.ProcessPrepare
+import main.com.bacsystem.pipeline.ProcessTest
 
 import static main.com.bacsystem.utils.Utility.*
 
@@ -28,11 +29,13 @@ class Staging extends PipelineBase {
     static final long serialVersionUID = 1
 
     private ProcessPrepare processPrepare
+    private ProcessTest processTest
 
     Staging(def dsl) {
         super(dsl)
         dsl.echo "[INFO] Load stage process"
         this.processPrepare = new ProcessPrepare(dsl)
+        this.processTest = new ProcessTest(dsl)
     }
 
     def parameters() {
@@ -49,5 +52,9 @@ class Staging extends PipelineBase {
         } finally {
             console("[INFO] Setting load for jenkins flow", this._dsl)
         }
+    }
+
+    def testing() {
+        console("[INFO] Starting unit tests for the component -> [${this._dsl.env.APP_NAME}] ", this._dsl)
     }
 }

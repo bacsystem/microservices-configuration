@@ -48,10 +48,6 @@ class ProcessPrepare extends PipelineBase {
         compilerFactory.compiler(this._dsl)
         def flowFactory = FlowFactory.getFlowFactory(flow, this._dsl)
         flowFactory.flow(flow, this._dsl)
-        //factory.build(this._dsl)
-        //BuildFactory.commit(this._dsl)
-        // BuildFactory.gitflow(this._dsl, process)
-        // BuildFactory.image(this._dsl, process)
         console("[INFO] Process started to run jenkins", this._dsl)
     }
 
