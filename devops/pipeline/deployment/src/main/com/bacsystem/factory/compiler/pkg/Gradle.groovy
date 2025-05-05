@@ -51,26 +51,6 @@ class Gradle extends ICompilerFactory {
     @Override
     void sdk(Object dsl) {
 
-        def javaPath = sh(
-                script: """
-                            if command -v update-alternatives > /dev/null; then
-                                update-alternatives --list java | grep 'java-${dsl.env.JDK}' | sed 's:/bin/java::' | head -n1
-                            else
-                                find /usr/lib/jvm -maxdepth 1 -type d -name "*java-${dsl.env.JDK}*" | head -n1
-                            fi
-                        """,
-                returnStdout: true
-        ).trim()
-
-        if (!javaPath) {
-            dsl.error "❌ No se encontró Java 21 instalado en el agente."
-        }
-
-        dsl.env.JAVA_HOME = javaPath
-        dsl.env.PATH = "${javaPath}/bin:${env.PATH}"
-        dsl.echo "✅ JAVA_HOME detectado: ${env.JAVA_HOME}"
-        dsl.sh 'java -version'
-
 
     }
 
