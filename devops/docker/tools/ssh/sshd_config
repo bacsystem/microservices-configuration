@@ -1,0 +1,36 @@
+# Archivo de configuración SSH personalizado
+
+# Puerto SSH personalizado y SFTP
+Port 22
+Subsystem sftp /usr/lib/openssh/sftp-server
+
+# Permitir acceso a usuarios específicos
+AllowUsers user1
+
+# Permitir autenticación con claves públicas
+PubkeyAuthentication yes
+
+# Asegurar el acceso a través de SSH
+PermitEmptyPasswords no
+
+# Permitir autenticación con contraseña (para demostración, no recomendado en producción)
+PasswordAuthentication yes
+
+# Ajustar según sea necesario para opciones adicionales
+# LogLevel INFO
+# PermitRootLogin no
+# ChallengeResponseAuthentication no
+# UsePAM yes
+# X11Forwarding yes
+# PrintMotd no
+# AcceptEnv LANG LC_*
+
+# Restricciones de acceso para el usuario user1
+#Match User user1
+#    ChrootDirectory /home/user1
+#    ForceCommand internal-sftp
+#    AllowTcpForwarding no
+#   PermitTTY no
+# ssh-keygen -t rsa -b 4096 -C "cbacilio@novopayment.com" -f id_rsa
+
+# ssh-keygen -t rsa -b 4096 -C "cbacilio@novopayment.com" -f .ssh/id_rsa

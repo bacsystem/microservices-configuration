@@ -1,5 +1,68 @@
 services:
 
+  postgres:
+    build:
+      context: pg
+      dockerfile: Dockerfile
+      target: dev
+    container_name: postgres-container
+    hostname: postgres
+    command: [ "postgres","-c", "wal_level=logical", "-c", "max_wal_senders=1" , "-c", "max_replication_slots=1" ]
+    healthcheck:
+      test: [ 'CMD','psql','-U','postgres','-c','SELECT 1' ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    user: root
+    ports:
+      - "5432:5432"
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - ./tmp/pg:/var/lib/postgresql/data
+    networks:
+      - bacsystem
+
+  mongo-db:
+    image: mongo:latest
+    container_name: ${MONGO_NAME}
+    restart: always
+    ports:
+      - ${MONGO_PORT_HOST}:${MONGO_PORT_CONTAINER}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    volumes:
+      - ${MONGO_VOLUME}
+    networks:
+      - ${MONGO_NETWORK}
+
+  redis:
+    image: redis:latest
+    container_name: ${REDIS_NAME}
+    ports:
+      - ${REDIS_PORT}:${REDIS_PORT_CLIENT}
+    volumes:
+      - ${REDIS_VOLUME}
+    networks:
+      - bacsystem
+
+  server-ftp:
+    build:
+      context: ssh
+      dockerfile: Dockerfile
+    container_name: sftp-container
+    #command: sleep infinity
+    restart: always
+    ports:
+      - "2222:22"
+    networks:
+      - bacsystem
+
   jenkins:
     build:
       context: jenkins
