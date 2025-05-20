@@ -15,6 +15,44 @@ services:
     networks:
       - bacsystem
 
+  agent-maven:
+    build:
+      context: jenkins/agents
+      dockerfile: maven.Dockerfile
+    container_name: agent-maven
+    privileged: true
+    user: root
+    restart: always
+    env_file:
+      - jenkins.env
+    ports:
+      - "22:22"
+    volumes:
+      - ./tmp/jenkins/maven:/home/jenkins/agent
+      - ./tmp/docker/run:/var/run/docker.sock
+      - ./tmp/docker/bin:/var/run/docker.sock
+    networks:
+      - bacsystem
+
+  agent-gradle:
+    build:
+      context: jenkins/agents
+      dockerfile: gradle.Dockerfile
+    container_name: gradle-agent
+    privileged: true
+    user: root
+    restart: always
+    env_file:
+      - jenkins.env
+    ports:
+      - "2200:22"
+    volumes:
+      - ./tmp/jenkins/gradle:/home/jenkins/agent
+      - ./tmp/docker/run:/var/run/docker.sock
+      - ./tmp/docker/bin:/var/run/docker.sock
+    networks:
+      - bacsystem
+
 networks:
   bacsystem:
     name: bacsystem-net
