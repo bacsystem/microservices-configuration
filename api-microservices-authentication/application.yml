@@ -12,6 +12,24 @@ server:
 
 # cloud configuration
 spring:
+  application:
+    name: api-microservices-authentication
+    version: v1
+  webflux:
+    base-path: /api-microservices-authentication/v1
+  main:
+    banner-mode: log
+    lazy-initialization: false
+    allow-circular-references: false
+  mvc:
+    converters:
+      preferred-json-mapper: jsonb
+  devtools:
+    restart:
+      enabled: true
+    add-properties: false
+  banner:
+    location: classpath:banner.txt
   cache:
     type:
     redis:
