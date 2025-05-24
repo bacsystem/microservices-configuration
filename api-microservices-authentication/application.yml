@@ -9,3 +9,14 @@ server:
   error:
     include-stacktrace: always
   port: ${ENV_SERVER_PORT:8003}
+
+# cloud configuration
+spring:
+  cache:
+    type:
+    redis:
+      time-to-live: 86400000
+  data:
+    redis:
+      host: localhost
+      port: 6379
