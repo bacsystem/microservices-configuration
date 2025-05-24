@@ -41,11 +41,11 @@ services:
     networks:
       - ${MONGO_NETWORK}
 
-  redis:
+  redis-db:
     image: redis:latest
     container_name: ${REDIS_NAME}
     ports:
-      - ${REDIS_PORT}:${REDIS_PORT_CLIENT}
+      - ${REDIS_PORT_HOST}:${REDIS_PORT_CONTAINER}
     volumes:
       - ${REDIS_VOLUME}
     networks:

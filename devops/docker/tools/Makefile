@@ -12,4 +12,7 @@ down:
 mongo-up:
 	$(COMPOSE) -p tools up -d mongo-db
 
+redis-up:
+	$(COMPOSE) -p tools up -d redis-db
+
 .PHONY: up down mongo-up
