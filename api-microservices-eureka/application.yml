@@ -17,7 +17,7 @@ spring:
     name: api-microservices-eureka
     version: v1
   webflux:
-    base-path: /api-microservices-eureka/v1
+    base-path: /eureka
   messages:
     encoding: UTF-8
   main:
