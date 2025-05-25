@@ -8,7 +8,7 @@ server:
     uri-encoding: utf-8
   error:
     include-stacktrace: always
-  port: ${ENV_SERVER_PORT:8000}
+  port: ${ENV_SERVER_PORT:8888}
 
 # cloud configuration
 spring:
