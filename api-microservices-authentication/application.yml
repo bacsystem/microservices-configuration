@@ -16,7 +16,7 @@ spring:
     name: api-microservices-authentication
     version: v1
   webflux:
-    base-path: /api-microservices-authentication/v1
+    base-path: /eureka
   main:
     banner-mode: log
     lazy-initialization: false
