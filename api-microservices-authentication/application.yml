@@ -37,4 +37,6 @@ spring:
   data:
     redis:
       host: localhost
-      port: 6379
+      port:
+# vault server --dev --dev-root-token-id="00000000-0000-0000-0000-000000000000"
+# vault kv put secret/api-microservices-authentication @api-microservices-authentication.json

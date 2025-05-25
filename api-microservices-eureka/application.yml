@@ -1,0 +1,26 @@
+#server configuration:
+server:
+  netty:
+    connection-timeout: 5000
+    idle-timeout: 6000
+  compression:
+    enabled: true
+  tomcat:
+    uri-encoding: utf-8
+  error:
+    include-stacktrace: always
+  port: ${ENV_SERVER_PORT:8761}
+
+#spring configuration:
+spring:
+  application:
+    name: api-microservices-eureka
+    version: v1
+  webflux:
+    base-path: /api-microservices-eureka/v1
+  messages:
+    encoding: UTF-8
+  main:
+    banner-mode: log
+    lazy-initialization: false
+    allow-circular-references: false
