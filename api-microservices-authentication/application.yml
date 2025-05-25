@@ -37,6 +37,12 @@ spring:
   data:
     redis:
       host: localhost
-      port:
+      port: 0
 # vault server --dev --dev-root-token-id="00000000-0000-0000-0000-000000000000"
 # vault kv put secret/api-microservices-authentication @api-microservices-authentication.json
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
