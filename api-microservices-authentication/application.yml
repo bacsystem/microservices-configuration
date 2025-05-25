@@ -34,10 +34,17 @@ spring:
     type:
     redis:
       time-to-live: 86400000
-  data:
-    redis:
+#  data:
+#    redis:
+#      host: localhost
+#      port: 0
+  cloud:
+    vault:
+      authentication: token
+      token: 00000000-0000-0000-0000-000000000000
+      scheme: http
+      port: 8200
       host: localhost
-      port: 0
 # vault server --dev --dev-root-token-id="00000000-0000-0000-0000-000000000000"
 # vault kv put secret/api-microservices-authentication @api-microservices-authentication.json
 eureka:
