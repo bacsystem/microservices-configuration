@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongodb8
+  name: mongodb8
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb8
+  template:
+    metadata:
+      labels:
+        app: mongodb8
+    spec:
+      containers:
+      - image: mongo:8.0.8
+        name: mongo
+        ports:
+        - containerPort: 27017
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: admin
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            value: admin123
