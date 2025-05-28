@@ -33,8 +33,8 @@ services:
       context: pg
       dockerfile: Dockerfile
       target: dev
-    container_name: postgres-container
-    hostname: postgres
+    container_name: bacsystem-postgres
+    hostname: localhost
     command: [ "postgres","-c", "wal_level=logical", "-c", "max_wal_senders=1" , "-c", "max_replication_slots=1" ]
     healthcheck:
       test: [ 'CMD','psql','-U','postgres','-c','SELECT 1' ]
