@@ -144,6 +144,27 @@ services:
     networks:
       - bacsystem
 
+  rabbitmq-app:
+    container_name: ${RABBITMQ_NAME}
+    image: "rabbitmq:3.11.3-management-alpine"
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      #- ${RABBITMQ_PORT_HOST}:${RABBITMQ_PORT_CONTAINER}
+      - "5672:5672"
+      - "15672:15672"
+      #- ${RABBITMQ_PORT_CLIENT}:${RABBITMQ_PORT_CLIENT}
+    networks:
+      - bacsystem
+    volumes:
+      - ${RABBITMQ_VOLUME}
+
 networks:
   bacsystem:
     name: bacsystem-net
